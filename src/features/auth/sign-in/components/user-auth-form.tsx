@@ -3,11 +3,12 @@ import { z } from 'zod'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Link, useNavigate } from '@tanstack/react-router'
+import { graphql } from '@/gql'
 import { Loader2, LogIn } from 'lucide-react'
-import { toast } from 'sonner'
+import { useMutation } from 'urql'
 import { IconFacebook, IconGithub } from '@/assets/brand-icons'
 import { useAuthStore } from '@/stores/auth-store'
-import { sleep, cn } from '@/lib/utils'
+import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
 import {
   Form,
@@ -27,7 +28,7 @@ const formSchema = z.object({
   password: z
     .string()
     .min(1, 'Please enter your password')
-    .min(7, 'Password must be at least 7 characters long'),
+    .min(6, 'Password must be at least 6 characters long'),
 })
 
 interface UserAuthFormProps extends React.HTMLAttributes<HTMLFormElement> {
@@ -51,33 +52,45 @@ export function UserAuthForm({
     },
   })
 
+  const LoginMutation = graphql(/* GraphQL */ `
+    mutation login($email: String!, $password: String!) {
+      login(email: $email, password: $password) {
+        exp
+        token
+        user {
+          id
+          email
+          nickname
+          avatar
+          status
+          createdAt
+          isAdmin
+        }
+      }
+    }
+  `)
+  const [_, executeMutation] = useMutation(LoginMutation)
+
   function onSubmit(data: z.infer<typeof formSchema>) {
     setIsLoading(true)
+    executeMutation({
+      email: data.email,
+      password: data.password,
+    }).then((result) => {
+      setIsLoading(false)
+      const user = result.data?.login.user
+      auth.setUser({
+        id: user?.id ?? '',
+        nickname: user?.nickname ?? '',
+        email: user?.email ?? '',
+        avatar: user?.avatar ?? '',
+        exp: result.data?.login.exp ?? 0,
+      })
+      auth.setAccessToken(result.data?.login.token ?? '')
 
-    toast.promise(sleep(2000), {
-      loading: 'Signing in...',
-      success: () => {
-        setIsLoading(false)
-
-        // Mock successful authentication with expiry computed at success time
-        const mockUser = {
-          accountNo: 'ACC001',
-          email: data.email,
-          role: ['user'],
-          exp: Date.now() + 24 * 60 * 60 * 1000, // 24 hours from now
-        }
-
-        // Set user and access token
-        auth.setUser(mockUser)
-        auth.setAccessToken('mock-access-token')
-
-        // Redirect to the stored location or default to dashboard
-        const targetPath = redirectTo || '/'
-        navigate({ to: targetPath, replace: true })
-
-        return `Welcome back, ${data.email}!`
-      },
-      error: 'Error',
+      // Redirect to the stored location or default to dashboard
+      const targetPath = redirectTo || '/'
+      navigate({ to: targetPath, replace: true })
     })
   }
 

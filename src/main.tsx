@@ -6,8 +6,9 @@ import {
   QueryClient,
   QueryClientProvider,
 } from '@tanstack/react-query'
-import { RouterProvider, createRouter } from '@tanstack/react-router'
+import { createRouter, RouterProvider } from '@tanstack/react-router'
 import { toast } from 'sonner'
+import { cacheExchange, Client, fetchExchange, Provider } from 'urql'
 import { useAuthStore } from '@/stores/auth-store'
 import { handleServerError } from '@/lib/handle-server-error'
 import { DirectionProvider } from './context/direction-provider'
@@ -69,6 +70,17 @@ const queryClient = new QueryClient({
   }),
 })
 
+const gqlClient = new Client({
+  url: 'http://127.0.0.1:9001/query',
+  exchanges: [cacheExchange, fetchExchange],
+  fetchOptions: () => {
+    const token = useAuthStore.getState().auth.accessToken
+    return {
+      headers: { authorization: token ? `Bearer ${token}` : '' },
+    }
+  },
+})
+
 // Create a new router instance
 const router = createRouter({
   routeTree,
@@ -90,15 +102,17 @@ if (!rootElement.innerHTML) {
   const root = ReactDOM.createRoot(rootElement)
   root.render(
     <StrictMode>
-      <QueryClientProvider client={queryClient}>
-        <ThemeProvider>
-          <FontProvider>
-            <DirectionProvider>
-              <RouterProvider router={router} />
-            </DirectionProvider>
-          </FontProvider>
-        </ThemeProvider>
-      </QueryClientProvider>
+      <Provider value={gqlClient}>
+        <QueryClientProvider client={queryClient}>
+          <ThemeProvider>
+            <FontProvider>
+              <DirectionProvider>
+                <RouterProvider router={router} />
+              </DirectionProvider>
+            </FontProvider>
+          </ThemeProvider>
+        </QueryClientProvider>
+      </Provider>
     </StrictMode>
   )
 }

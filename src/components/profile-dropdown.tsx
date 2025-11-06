@@ -1,5 +1,5 @@
 import { Link } from '@tanstack/react-router'
-import { useAuthStore } from '@/stores/auth-store.ts'
+import { useAuth } from '@/context/auth-context.tsx'
 import useDialogState from '@/hooks/use-dialog-state'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Button } from '@/components/ui/button'
@@ -17,15 +17,15 @@ import { SignOutDialog } from '@/components/sign-out-dialog'
 
 export function ProfileDropdown() {
   const [open, setOpen] = useDialogState()
-  const { auth } = useAuthStore()
+  const { user } = useAuth()
   return (
     <>
       <DropdownMenu modal={false}>
         <DropdownMenuTrigger asChild>
           <Button variant='ghost' className='relative h-8 w-8 rounded-full'>
             <Avatar className='h-8 w-8'>
-              <AvatarImage src={auth.user?.avatar} alt='@shadcn' />
-              <AvatarFallback>{auth.user?.nickname}</AvatarFallback>
+              <AvatarImage src={user?.avatar} alt='@shadcn' />
+              <AvatarFallback>{user?.nickname}</AvatarFallback>
             </Avatar>
           </Button>
         </DropdownMenuTrigger>
@@ -33,10 +33,10 @@ export function ProfileDropdown() {
           <DropdownMenuLabel className='font-normal'>
             <div className='flex flex-col gap-1.5'>
               <p className='text-sm leading-none font-medium'>
-                {auth.user?.nickname}
+                {user?.nickname}
               </p>
               <p className='text-muted-foreground text-xs leading-none'>
-                {auth.user?.email}
+                {user?.email}
               </p>
             </div>
           </DropdownMenuLabel>

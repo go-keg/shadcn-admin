@@ -25,6 +25,7 @@ import { Route as authForgotPasswordRouteImport } from './routes/(auth)/forgot-p
 import { Route as ClerkAuthenticatedRouteRouteImport } from './routes/clerk/_authenticated/route'
 import { Route as ClerkauthRouteRouteImport } from './routes/clerk/(auth)/route'
 import { Route as AuthenticatedSettingsRouteRouteImport } from './routes/_authenticated/settings/route'
+import { Route as AuthenticatedExamplesRouteRouteImport } from './routes/_authenticated/examples/route'
 import { Route as AuthenticatedUsersIndexRouteImport } from './routes/_authenticated/users/index'
 import { Route as AuthenticatedTasksIndexRouteImport } from './routes/_authenticated/tasks/index'
 import { Route as AuthenticatedSettingsIndexRouteImport } from './routes/_authenticated/settings/index'
@@ -38,6 +39,10 @@ import { Route as AuthenticatedSettingsNotificationsRouteImport } from './routes
 import { Route as AuthenticatedSettingsDisplayRouteImport } from './routes/_authenticated/settings/display'
 import { Route as AuthenticatedSettingsAppearanceRouteImport } from './routes/_authenticated/settings/appearance'
 import { Route as AuthenticatedSettingsAccountRouteImport } from './routes/_authenticated/settings/account'
+import { Route as AuthenticatedExamplesWsRouteImport } from './routes/_authenticated/examples/ws'
+import { Route as AuthenticatedExamplesTableRouteImport } from './routes/_authenticated/examples/table'
+import { Route as AuthenticatedExamplesQueryRouteImport } from './routes/_authenticated/examples/query'
+import { Route as AuthenticatedExamplesDataTableRouteImport } from './routes/_authenticated/examples/data-table'
 import { Route as AuthenticatedErrorsErrorRouteImport } from './routes/_authenticated/errors/$error'
 
 const ClerkRouteRoute = ClerkRouteRouteImport.update({
@@ -118,6 +123,12 @@ const AuthenticatedSettingsRouteRoute =
     path: '/settings',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
+const AuthenticatedExamplesRouteRoute =
+  AuthenticatedExamplesRouteRouteImport.update({
+    id: '/examples',
+    path: '/examples',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const AuthenticatedUsersIndexRoute = AuthenticatedUsersIndexRouteImport.update({
   id: '/users/',
   path: '/users/',
@@ -190,6 +201,29 @@ const AuthenticatedSettingsAccountRoute =
     path: '/account',
     getParentRoute: () => AuthenticatedSettingsRouteRoute,
   } as any)
+const AuthenticatedExamplesWsRoute = AuthenticatedExamplesWsRouteImport.update({
+  id: '/ws',
+  path: '/ws',
+  getParentRoute: () => AuthenticatedExamplesRouteRoute,
+} as any)
+const AuthenticatedExamplesTableRoute =
+  AuthenticatedExamplesTableRouteImport.update({
+    id: '/table',
+    path: '/table',
+    getParentRoute: () => AuthenticatedExamplesRouteRoute,
+  } as any)
+const AuthenticatedExamplesQueryRoute =
+  AuthenticatedExamplesQueryRouteImport.update({
+    id: '/query',
+    path: '/query',
+    getParentRoute: () => AuthenticatedExamplesRouteRoute,
+  } as any)
+const AuthenticatedExamplesDataTableRoute =
+  AuthenticatedExamplesDataTableRouteImport.update({
+    id: '/data-table',
+    path: '/data-table',
+    getParentRoute: () => AuthenticatedExamplesRouteRoute,
+  } as any)
 const AuthenticatedErrorsErrorRoute =
   AuthenticatedErrorsErrorRouteImport.update({
     id: '/errors/$error',
@@ -199,6 +233,7 @@ const AuthenticatedErrorsErrorRoute =
 
 export interface FileRoutesByFullPath {
   '/clerk': typeof ClerkAuthenticatedRouteRouteWithChildren
+  '/examples': typeof AuthenticatedExamplesRouteRouteWithChildren
   '/settings': typeof AuthenticatedSettingsRouteRouteWithChildren
   '/clerk/': typeof ClerkauthRouteRouteWithChildren
   '/forgot-password': typeof authForgotPasswordRoute
@@ -213,6 +248,10 @@ export interface FileRoutesByFullPath {
   '/503': typeof errors503Route
   '/': typeof AuthenticatedIndexRoute
   '/errors/$error': typeof AuthenticatedErrorsErrorRoute
+  '/examples/data-table': typeof AuthenticatedExamplesDataTableRoute
+  '/examples/query': typeof AuthenticatedExamplesQueryRoute
+  '/examples/table': typeof AuthenticatedExamplesTableRoute
+  '/examples/ws': typeof AuthenticatedExamplesWsRoute
   '/settings/account': typeof AuthenticatedSettingsAccountRoute
   '/settings/appearance': typeof AuthenticatedSettingsAppearanceRoute
   '/settings/display': typeof AuthenticatedSettingsDisplayRoute
@@ -228,6 +267,7 @@ export interface FileRoutesByFullPath {
   '/users': typeof AuthenticatedUsersIndexRoute
 }
 export interface FileRoutesByTo {
+  '/examples': typeof AuthenticatedExamplesRouteRouteWithChildren
   '/clerk': typeof ClerkAuthenticatedRouteRouteWithChildren
   '/forgot-password': typeof authForgotPasswordRoute
   '/otp': typeof authOtpRoute
@@ -241,6 +281,10 @@ export interface FileRoutesByTo {
   '/503': typeof errors503Route
   '/': typeof AuthenticatedIndexRoute
   '/errors/$error': typeof AuthenticatedErrorsErrorRoute
+  '/examples/data-table': typeof AuthenticatedExamplesDataTableRoute
+  '/examples/query': typeof AuthenticatedExamplesQueryRoute
+  '/examples/table': typeof AuthenticatedExamplesTableRoute
+  '/examples/ws': typeof AuthenticatedExamplesWsRoute
   '/settings/account': typeof AuthenticatedSettingsAccountRoute
   '/settings/appearance': typeof AuthenticatedSettingsAppearanceRoute
   '/settings/display': typeof AuthenticatedSettingsDisplayRoute
@@ -259,6 +303,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/clerk': typeof ClerkRouteRouteWithChildren
+  '/_authenticated/examples': typeof AuthenticatedExamplesRouteRouteWithChildren
   '/_authenticated/settings': typeof AuthenticatedSettingsRouteRouteWithChildren
   '/clerk/(auth)': typeof ClerkauthRouteRouteWithChildren
   '/clerk/_authenticated': typeof ClerkAuthenticatedRouteRouteWithChildren
@@ -274,6 +319,10 @@ export interface FileRoutesById {
   '/(errors)/503': typeof errors503Route
   '/_authenticated/': typeof AuthenticatedIndexRoute
   '/_authenticated/errors/$error': typeof AuthenticatedErrorsErrorRoute
+  '/_authenticated/examples/data-table': typeof AuthenticatedExamplesDataTableRoute
+  '/_authenticated/examples/query': typeof AuthenticatedExamplesQueryRoute
+  '/_authenticated/examples/table': typeof AuthenticatedExamplesTableRoute
+  '/_authenticated/examples/ws': typeof AuthenticatedExamplesWsRoute
   '/_authenticated/settings/account': typeof AuthenticatedSettingsAccountRoute
   '/_authenticated/settings/appearance': typeof AuthenticatedSettingsAppearanceRoute
   '/_authenticated/settings/display': typeof AuthenticatedSettingsDisplayRoute
@@ -292,6 +341,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/clerk'
+    | '/examples'
     | '/settings'
     | '/clerk/'
     | '/forgot-password'
@@ -306,6 +356,10 @@ export interface FileRouteTypes {
     | '/503'
     | '/'
     | '/errors/$error'
+    | '/examples/data-table'
+    | '/examples/query'
+    | '/examples/table'
+    | '/examples/ws'
     | '/settings/account'
     | '/settings/appearance'
     | '/settings/display'
@@ -321,6 +375,7 @@ export interface FileRouteTypes {
     | '/users'
   fileRoutesByTo: FileRoutesByTo
   to:
+    | '/examples'
     | '/clerk'
     | '/forgot-password'
     | '/otp'
@@ -334,6 +389,10 @@ export interface FileRouteTypes {
     | '/503'
     | '/'
     | '/errors/$error'
+    | '/examples/data-table'
+    | '/examples/query'
+    | '/examples/table'
+    | '/examples/ws'
     | '/settings/account'
     | '/settings/appearance'
     | '/settings/display'
@@ -351,6 +410,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/_authenticated'
     | '/clerk'
+    | '/_authenticated/examples'
     | '/_authenticated/settings'
     | '/clerk/(auth)'
     | '/clerk/_authenticated'
@@ -366,6 +426,10 @@ export interface FileRouteTypes {
     | '/(errors)/503'
     | '/_authenticated/'
     | '/_authenticated/errors/$error'
+    | '/_authenticated/examples/data-table'
+    | '/_authenticated/examples/query'
+    | '/_authenticated/examples/table'
+    | '/_authenticated/examples/ws'
     | '/_authenticated/settings/account'
     | '/_authenticated/settings/appearance'
     | '/_authenticated/settings/display'
@@ -510,6 +574,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedSettingsRouteRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/examples': {
+      id: '/_authenticated/examples'
+      path: '/examples'
+      fullPath: '/examples'
+      preLoaderRoute: typeof AuthenticatedExamplesRouteRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/users/': {
       id: '/_authenticated/users/'
       path: '/users'
@@ -601,6 +672,34 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedSettingsAccountRouteImport
       parentRoute: typeof AuthenticatedSettingsRouteRoute
     }
+    '/_authenticated/examples/ws': {
+      id: '/_authenticated/examples/ws'
+      path: '/ws'
+      fullPath: '/examples/ws'
+      preLoaderRoute: typeof AuthenticatedExamplesWsRouteImport
+      parentRoute: typeof AuthenticatedExamplesRouteRoute
+    }
+    '/_authenticated/examples/table': {
+      id: '/_authenticated/examples/table'
+      path: '/table'
+      fullPath: '/examples/table'
+      preLoaderRoute: typeof AuthenticatedExamplesTableRouteImport
+      parentRoute: typeof AuthenticatedExamplesRouteRoute
+    }
+    '/_authenticated/examples/query': {
+      id: '/_authenticated/examples/query'
+      path: '/query'
+      fullPath: '/examples/query'
+      preLoaderRoute: typeof AuthenticatedExamplesQueryRouteImport
+      parentRoute: typeof AuthenticatedExamplesRouteRoute
+    }
+    '/_authenticated/examples/data-table': {
+      id: '/_authenticated/examples/data-table'
+      path: '/data-table'
+      fullPath: '/examples/data-table'
+      preLoaderRoute: typeof AuthenticatedExamplesDataTableRouteImport
+      parentRoute: typeof AuthenticatedExamplesRouteRoute
+    }
     '/_authenticated/errors/$error': {
       id: '/_authenticated/errors/$error'
       path: '/errors/$error'
@@ -610,6 +709,26 @@ declare module '@tanstack/react-router' {
     }
   }
 }
+
+interface AuthenticatedExamplesRouteRouteChildren {
+  AuthenticatedExamplesDataTableRoute: typeof AuthenticatedExamplesDataTableRoute
+  AuthenticatedExamplesQueryRoute: typeof AuthenticatedExamplesQueryRoute
+  AuthenticatedExamplesTableRoute: typeof AuthenticatedExamplesTableRoute
+  AuthenticatedExamplesWsRoute: typeof AuthenticatedExamplesWsRoute
+}
+
+const AuthenticatedExamplesRouteRouteChildren: AuthenticatedExamplesRouteRouteChildren =
+  {
+    AuthenticatedExamplesDataTableRoute: AuthenticatedExamplesDataTableRoute,
+    AuthenticatedExamplesQueryRoute: AuthenticatedExamplesQueryRoute,
+    AuthenticatedExamplesTableRoute: AuthenticatedExamplesTableRoute,
+    AuthenticatedExamplesWsRoute: AuthenticatedExamplesWsRoute,
+  }
+
+const AuthenticatedExamplesRouteRouteWithChildren =
+  AuthenticatedExamplesRouteRoute._addFileChildren(
+    AuthenticatedExamplesRouteRouteChildren,
+  )
 
 interface AuthenticatedSettingsRouteRouteChildren {
   AuthenticatedSettingsAccountRoute: typeof AuthenticatedSettingsAccountRoute
@@ -635,6 +754,7 @@ const AuthenticatedSettingsRouteRouteWithChildren =
   )
 
 interface AuthenticatedRouteRouteChildren {
+  AuthenticatedExamplesRouteRoute: typeof AuthenticatedExamplesRouteRouteWithChildren
   AuthenticatedSettingsRouteRoute: typeof AuthenticatedSettingsRouteRouteWithChildren
   AuthenticatedIndexRoute: typeof AuthenticatedIndexRoute
   AuthenticatedErrorsErrorRoute: typeof AuthenticatedErrorsErrorRoute
@@ -646,6 +766,7 @@ interface AuthenticatedRouteRouteChildren {
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedExamplesRouteRoute: AuthenticatedExamplesRouteRouteWithChildren,
   AuthenticatedSettingsRouteRoute: AuthenticatedSettingsRouteRouteWithChildren,
   AuthenticatedIndexRoute: AuthenticatedIndexRoute,
   AuthenticatedErrorsErrorRoute: AuthenticatedErrorsErrorRoute,

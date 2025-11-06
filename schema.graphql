@@ -1,6 +1,7 @@
 schema {
   query: Query
   mutation: Mutation
+  subscription: Subscription
 }
 
 """
@@ -218,6 +219,32 @@ input MembershipWhereInput {
   updatedAtNotNil: Boolean
 }
 
+"""消息实体"""
+type Message {
+  content: String!
+  contentType: MessageContentType!
+  createdAt: Time!
+  id: ID!
+  metadata: Map
+  sender: ID
+  type: MessageType!
+}
+
+"""消息内容类型"""
+enum MessageContentType {
+  CUSTOM
+  FILE
+  IMAGE
+  SYSTEM
+  TEXT
+}
+
+"""消息类型"""
+enum MessageType {
+  DIRECT
+  SYSTEM
+}
+
 type Mutation {
   """创建组织架构成员"""
   createMembership(input: CreateMembershipInput!): Membership!
@@ -252,6 +279,7 @@ type Mutation {
   refresh: LoginReply!
   """重置密码"""
   resetPassword(oldPassword: String!, password: String!): Boolean!
+  sendMessage(input: SendMessageInput!): Message!
   """发送验证码"""
   sendVerifyCode(email: String!, verifyType: VerifyCodeType!): Boolean!
   unlinkGoogleAccount: Boolean!
@@ -1042,6 +1070,18 @@ type Query {
     """Filtering options for Users returned from the connection."""
     where: UserWhereInput
   ): UserConnection!
+}
+
+input SendMessageInput {
+  content: String!
+  contentType: MessageContentType! = TEXT
+  metadata: Map
+  sender: ID
+  type: MessageType! = SYSTEM
+}
+
+type Subscription {
+  messageAdded: Message!
 }
 
 type Tenant implements Node {

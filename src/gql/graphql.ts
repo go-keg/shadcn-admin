@@ -1,5 +1,6 @@
 /* eslint-disable */
-import type { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/core';
+
+
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = T | null | undefined;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
@@ -200,59 +201,87 @@ export type MembershipWhereInput = {
   updatedAtNotNil?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
-export type Mutation = {
-  __typename?: 'Mutation';
-  /** 创建组织架构成员 */
-  createMembership: Membership;
-  /** 创建组织架构 */
-  createOrganization: Organization;
-  /** 创建权限 */
-  createPermission: Permission;
-  /** 创建租户 */
-  createTenant: Tenant;
-  /** 创建角色 */
-  createTenantRole: TenantRole;
-  /** 创建用户 */
-  createUser: User;
-  /** 删除组织架构成员 */
-  deleteMembership: Scalars['Boolean']['output'];
-  /** 删除组织架构 */
-  deleteOrganization: Scalars['Boolean']['output'];
-  /** 删除权限 */
-  deletePermission: Scalars['Boolean']['output'];
-  /** 删除租户 */
-  deleteTenant: Scalars['Boolean']['output'];
-  /** 删除角色 */
-  deleteTenantRole: Scalars['Boolean']['output'];
-  /** 删除用户 */
-  deleteUser: Scalars['Boolean']['output'];
-  /** 忘记密码 */
-  forgetPassword: Scalars['Boolean']['output'];
-  linkGoogleAccount: Scalars['Boolean']['output'];
-  /** 登陆 */
-  login: LoginReply;
-  /** 刷新token */
-  refresh: LoginReply;
-  /** 重置密码 */
-  resetPassword: Scalars['Boolean']['output'];
-  /** 发送验证码 */
-  sendVerifyCode: Scalars['Boolean']['output'];
-  unlinkGoogleAccount: Scalars['Boolean']['output'];
-  /** 修改组织架构成员 */
-  updateMembership: Membership;
-  /** 修改组织架构 */
-  updateOrganization: Organization;
-  /** 修改权限 */
-  updatePermission: Permission;
-  /** 修改个人信息 */
-  updateProfile: User;
-  /** 修改租户 */
-  updateTenant: Tenant;
-  /** 修改角色 */
-  updateTenantRole: TenantRole;
-  /** 修改用户 */
-  updateUser: User;
+/** 消息实体 */
+export type Message = {
+  __typename?: 'Message';
+  content: Scalars['String']['output'];
+  contentType: MessageContentType;
+  createdAt: Scalars['Time']['output'];
+  id: Scalars['ID']['output'];
+  metadata?: Maybe<Scalars['Map']['output']>;
+  sender?: Maybe<Scalars['ID']['output']>;
+  type: MessageType;
 };
+
+/** 消息内容类型 */
+export enum MessageContentType {
+  Custom = 'CUSTOM',
+  File = 'FILE',
+  Image = 'IMAGE',
+  System = 'SYSTEM',
+  Text = 'TEXT'
+}
+
+/** 消息类型 */
+export enum MessageType {
+  Direct = 'DIRECT',
+  System = 'SYSTEM'
+}
+
+export type Mutation = {
+  __typename?: 'Mutation'
+  /** 创建组织架构成员 */
+  createMembership: Membership
+  /** 创建组织架构 */
+  createOrganization: Organization
+  /** 创建权限 */
+  createPermission: Permission
+  /** 创建租户 */
+  createTenant: Tenant
+  /** 创建角色 */
+  createTenantRole: TenantRole
+  /** 创建用户 */
+  createUser: User
+  /** 删除组织架构成员 */
+  deleteMembership: Scalars['Boolean']['output']
+  /** 删除组织架构 */
+  deleteOrganization: Scalars['Boolean']['output']
+  /** 删除权限 */
+  deletePermission: Scalars['Boolean']['output']
+  /** 删除租户 */
+  deleteTenant: Scalars['Boolean']['output']
+  /** 删除角色 */
+  deleteTenantRole: Scalars['Boolean']['output']
+  /** 删除用户 */
+  deleteUser: Scalars['Boolean']['output']
+  /** 忘记密码 */
+  forgetPassword: Scalars['Boolean']['output']
+  linkGoogleAccount: Scalars['Boolean']['output']
+  /** 登陆 */
+  login: LoginReply
+  /** 刷新token */
+  refresh: LoginReply
+  /** 重置密码 */
+  resetPassword: Scalars['Boolean']['output']
+  sendMessage: Message
+  /** 发送验证码 */
+  sendVerifyCode: Scalars['Boolean']['output']
+  unlinkGoogleAccount: Scalars['Boolean']['output']
+  /** 修改组织架构成员 */
+  updateMembership: Membership
+  /** 修改组织架构 */
+  updateOrganization: Organization
+  /** 修改权限 */
+  updatePermission: Permission
+  /** 修改个人信息 */
+  updateProfile: User
+  /** 修改租户 */
+  updateTenant: Tenant
+  /** 修改角色 */
+  updateTenantRole: TenantRole
+  /** 修改用户 */
+  updateUser: User
+}
 
 
 export type MutationCreateMembershipArgs = {
@@ -342,10 +371,14 @@ export type MutationResetPasswordArgs = {
 };
 
 
+export type MutationSendMessageArgs = {
+  input: SendMessageInput
+}
+
 export type MutationSendVerifyCodeArgs = {
-  email: Scalars['String']['input'];
-  verifyType: VerifyCodeType;
-};
+  email: Scalars['String']['input']
+  verifyType: VerifyCodeType
+}
 
 
 export type MutationUpdateMembershipArgs = {
@@ -1160,18 +1193,31 @@ export type QueryUsersArgs = {
   where?: InputMaybe<UserWhereInput>;
 };
 
+export type SendMessageInput = {
+  content: Scalars['String']['input']
+  contentType?: MessageContentType
+  metadata?: InputMaybe<Scalars['Map']['input']>
+  sender?: InputMaybe<Scalars['ID']['input']>
+  type?: MessageType
+}
+
+export type Subscription = {
+  __typename?: 'Subscription'
+  messageAdded: Message
+}
+
 export type Tenant = Node & {
-  __typename?: 'Tenant';
-  createdAt?: Maybe<Scalars['Time']['output']>;
-  features?: Maybe<Array<Scalars['String']['output']>>;
-  id: Scalars['ID']['output'];
-  maxUsers: Scalars['Int']['output'];
-  name: Scalars['String']['output'];
-  organizations?: Maybe<Array<Organization>>;
-  roles?: Maybe<Array<TenantRole>>;
-  tenantUsers?: Maybe<Array<TenantUser>>;
-  updatedAt?: Maybe<Scalars['Time']['output']>;
-};
+  __typename?: 'Tenant'
+  createdAt?: Maybe<Scalars['Time']['output']>
+  features?: Maybe<Array<Scalars['String']['output']>>
+  id: Scalars['ID']['output']
+  maxUsers: Scalars['Int']['output']
+  name: Scalars['String']['output']
+  organizations?: Maybe<Array<Organization>>
+  roles?: Maybe<Array<TenantRole>>
+  tenantUsers?: Maybe<Array<TenantUser>>
+  updatedAt?: Maybe<Scalars['Time']['output']>
+}
 
 /** Ordering options for Tenant connections */
 export type TenantOrder = {
@@ -1780,5 +1826,208 @@ export type LoginMutationVariables = Exact<{
 
 export type LoginMutation = { __typename?: 'Mutation', login: { __typename?: 'LoginReply', exp: number, token: string, user: { __typename?: 'User', id: string, email: string, nickname: string, avatar?: string | null, status: UserStatus, createdAt?: any | null, isAdmin: boolean } } };
 
+export type UserInfoFragment = {
+  __typename?: 'User'
+  id: string
+  email: string
+  nickname: string
+  avatar?: string | null
+  status: UserStatus
+  createdAt?: any | null
+  isAdmin: boolean
+}
 
-export const LoginDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"login"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"email"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"password"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"login"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"email"},"value":{"kind":"Variable","name":{"kind":"Name","value":"email"}}},{"kind":"Argument","name":{"kind":"Name","value":"password"},"value":{"kind":"Variable","name":{"kind":"Name","value":"password"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"exp"}},{"kind":"Field","name":{"kind":"Name","value":"token"}},{"kind":"Field","name":{"kind":"Name","value":"user"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"nickname"}},{"kind":"Field","name":{"kind":"Name","value":"avatar"}},{"kind":"Field","name":{"kind":"Name","value":"status"}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}},{"kind":"Field","name":{"kind":"Name","value":"isAdmin"}}]}}]}}]}}]} as unknown as DocumentNode<LoginMutation, LoginMutationVariables>;
+export type ProfileQueryVariables = Exact<{ [key: string]: never }>
+
+export type ProfileQuery = {
+  __typename?: 'Query'
+  profile: {
+    __typename?: 'User'
+    id: string
+    email: string
+    nickname: string
+    avatar?: string | null
+    status: UserStatus
+    createdAt?: any | null
+    isAdmin: boolean
+  }
+}
+
+export type UserListQueryVariables = Exact<{
+  offset?: Scalars['Int']['input']
+  limit?: Scalars['Int']['input']
+  where?: InputMaybe<UserWhereInput>
+}>
+
+
+export type UserListQuery = {
+  __typename?: 'Query',
+  userList: {
+    __typename?: 'UserList',
+    nodes?: Array<{
+      __typename?: 'User',
+      id: string,
+      nickname: string,
+      email: string,
+      avatar?: string | null,
+      status: UserStatus,
+      createdAt?: any | null,
+      isAdmin: boolean
+    }> | null
+  }
+};
+
+export type MessageSubSubscriptionVariables = Exact<{ [key: string]: never; }>;
+
+
+export type MessageSubSubscription = {
+  __typename?: 'Subscription',
+  messageAdded: {
+    __typename?: 'Message',
+    id: string,
+    sender?: string | null,
+    type: MessageType,
+    content: string,
+    contentType: MessageContentType,
+    metadata?: any | null,
+    createdAt: any
+  }
+};
+
+export const UserInfoFragmentDoc = {
+  "kind": "Document",
+  "d'kind'io'Document'  "k'definitions'ntDefinit'kind'  'FragmentDefinition'"Name"'name'ue":'kind'In'Name'
+ 'value'eC'UserInfo' { "kind'typeCondition' "na'kind' "'NamedType'e"'name'ue":'kind'" 'Name'  'value'ti'User': {
+      'selectionSet'tionSet",
+'kind'"s'SelectionSet' "kind":'selections'ame":'kind'nd'Field'e"'name'ue":'kind'} 'Name'  'value'in'id'"Field",
+       'kind'":'Field'd": "Name"'name'ue":'kind'l"'Name'  'value'ki'email'ie,ld", "name":'kind'nd'Field'e"'name'ue":'kind'na'Name'},'value'  'nickname'"Field",
+       'kind'":'Field'd": "Name"'name'ue":'kind'ar'Name'  'value'"k'avatar'ie,ld", "name":'kind'nd'Field'e"'name'ue":'kind'us'Name' {'value'  'status'"Field",
+       'kind'":'Field'd": "Name"'name'ue":'kind'te'Name'
+ 'value' {'createdAt'ie,ld", "name":'kind'nd'Field'e"'name'ue":'kind'mi'Name']
+'value' }'isAdmin'known, as Do,cumen,tNode<UserInfoFragment, unknown>;
+export const LoginDocuent = {
+  "kind": "Document", "def'kind'ns'Document'"k'definitions'ionDefini'kind'
+ 'OperationDefinition'tion",'operation': 'mutation'"Name"'name'ue":'kind'n"'Name'  'value'le'login'ions": ['variableDefinitions'ableDefinit'kind'  'VariableDefinition'ind": "V'variable'"nam'kind'"k'Variable'e"'name'ue":'kind'l"'Name'  'value'pe'email'ind": "NonNu'type'", "'kind' {'NonNullType'ed'type' "na'kind' "'NamedType'e"'name'ue":'kind'ng'Name'}
+'value'{
+'String'ind": ,"VariableDefinit'kind'  'VariableDefinition'ind": "V'variable'"nam'kind'"k'Variable'e"'name'ue":'kind'wo'Name'},'value'"t'password'ind": "NonNu'type'", "'kind' {'NonNullType'ed'type' "na'kind' "'NamedType'e"'name'ue":'kind'ng'Name'}
+'value'
+ 'String'ctionS,et": {
+      'selectionSet'tionSet",
+'kind'"s'SelectionSet'
+       'selections'eld",
+       'kind'":'Field'd": "Name"'name'ue":'kind'n"'Name'  'value'gu'login' [{
+        'arguments'Argument",
+    'kind'"n'Argument'ind": "Name"'name'ue":'kind'l"'Name'  'value'va'email' "kind": "Vari'value'"nam'kind'"k'Variable'e"'name'ue":'kind'l"'Name'  'value' {'email'    ,"kind": "Argument",
+    'kind'"n'Argument'ind": "Name"'name'ue":'kind'wo'Name'
+ 'value'  'password' "kind": "Vari'value'"nam'kind'"k'Variable'e"'name'ue":'kind'wo'Name'}
+'value' }'password' "se,lectionSet": {
+      'selectionSet'electionSet",
+'kind'  'SelectionSet': [{ "kind":'selections'ame":'kind'nd'Field'e"'name'ue":'kind' }'Name'  'value'  'exp'd": "Field",
+       'kind'na'Field'"kind": "Name"'name'ue":'kind'n"'Name'  'value' {'token'  ,    "kind": "Field",
+       'kind'na'Field'"kind": "Name"'name'ue":'kind'" 'Name'  'value'"s'user'onSet": {
+      'selectionSet': "SelectionSet",
+'kind'  'SelectionSet'ons": [{ "kind":'selections'read"'kind'e"'FragmentSpread'e"'name'ue":'kind'In'Name'}]'value'  'UserInfo'     , }]
+        }
+,      }]
+    ,}
+  }, {
+ ,   "kind",: "Fra,gmentDefinit'kind'  'FragmentDefinition'"Name"'name'ue":'kind'In'Name'
+ 'value'eC'UserInfo' { "kind'typeCondition' "na'kind' "'NamedType'e"'name'ue":'kind'" 'Name'  'value'ti'User': {
+      'selectionSet'tionSet",
+'kind'"s'SelectionSet' "kind":'selections'ame":'kind'nd'Field'e"'name'ue":'kind'} 'Name'  'value'in'id'"Field",
+       'kind'":'Field'd": "Name"'name'ue":'kind'l"'Name'  'value'ki'email'ie,ld", "name":'kind'nd'Field'e"'name'ue":'kind'na'Name'},'value'  'nickname'"Field",
+       'kind'":'Field'd": "Name"'name'ue":'kind'ar'Name'  'value'"k'avatar'ie,ld", "name":'kind'nd'Field'e"'name'ue":'kind'us'Name' {'value'  'status'"Field",
+       'kind'":'Field'd": "Name"'name'ue":'kind'te'Name'
+ 'value' {'createdAt'ie,ld", "name":'kind'nd'Field'e"'name'ue":'kind'mi'Name']
+'value' }'isAdmin'known, as Do,cumen,tNode<LoginMutation, LoginMutationVariables>;
+export const ProfileDoument = {
+  "kind": "Document",
+  "d'kind'io'Document'  "k'definitions'ionDefini'kind'
+ 'OperationDefinition'y",
+  'operation' "'query'"Name"'name'ue":'kind'il'Name'  'value'ct'profile'{
+      'selectionSet'tionSet",
+'kind'"s'SelectionSet'
+       'selections'eld",
+       'kind'":'Field'd": "Name"'name'ue":'kind'il'Name'  'value'se'profile't": {
+      'selectionSet'electionSet",
+'kind'  'SelectionSet': [{ "kind":'selections'read"'kind'e"'FragmentSpread'e"'name'ue":'kind'In'Name'}]'value'  'UserInfo'
+    ,}
+  }, {
+ ,   "kind",: "Fra,gmentDefinit'kind'  'FragmentDefinition'"Name"'name'ue":'kind'In'Name'
+ 'value'eC'UserInfo' { "kind'typeCondition' "na'kind' "'NamedType'e"'name'ue":'kind'" 'Name'  'value'ti'User': {
+      'selectionSet'tionSet",
+'kind'"s'SelectionSet' "kind":'selections'ame":'kind'nd'Field'e"'name'ue":'kind'} 'Name'  'value'in'id'"Field",
+       'kind'":'Field'd": "Name"'name'ue":'kind'l"'Name'  'value'ki'email'ie,ld", "name":'kind'nd'Field'e"'name'ue":'kind'na'Name'},'value'  'nickname'"Field",
+       'kind'":'Field'd": "Name"'name'ue":'kind'ar'Name'  'value'"k'avatar'ie,ld", "name":'kind'nd'Field'e"'name'ue":'kind'us'Name' {'value'  'status'"Field",
+       'kind'":'Field'd": "Name"'name'ue":'kind'te'Name'
+ 'value' {'createdAt'ie,ld", "name":'kind'nd'Field'e"'name'ue":'kind'mi'Name']
+'value' }'isAdmin'known, as Do,cumen,tNode<ProfileQuery, ProfileQueryVariables>;
+export const UserListDcument = {
+  "kind": "Document", "def'kind'ns'Document'"k'definitions'ionDefini'kind'
+ 'OperationDefinition'y",
+  'operation' "'query'"Name"'name'ue":'kind'Li'Name'
+ 'value'ia'userList'ions": ['variableDefinitions'ableDefinit'kind'  'VariableDefinition'ind": "V'variable'"nam'kind'"k'Variable'e"'name'ue":'kind'et'Name'
+ 'value'yp'offset'ind": "NonNu'type'", "'kind' {'NonNullType'ed'type' "na'kind' "'NamedType'e"'name'ue":'kind' }'Name'  'value'fa'Int'lue": { "kind"'defaultValue'"val'kind'0"'IntValue'{
+'value'ki'0': ,"VariableDefinit'kind'  'VariableDefinition'ind": "V'variable'"nam'kind'"k'Variable'e"'name'ue":'kind't"'Name'  'value'pe'limit'ind": "NonNu'type'", "'kind' {'NonNullType'ed'type' "na'kind' "'NamedType'e"'name'ue":'kind' }'Name'  'value'fa'Int'lue": { "kind"'defaultValue'"val'kind'10'IntValue' {'value'"k'10': ,"VariableDefinit'kind'  'VariableDefinition'ind": "V'variable'"nam'kind'"k'Variable'e"'name'ue":'kind'e"'Name'  'value'pe'where'ind": "Named'type' "na'kind' "'NamedType'e"'name'ue":'kind'Wh'Name'ut'value'  'UserWhereInput'ionS,et": {
+      'selectionSet'tionSet", 'kind'ti'SelectionSet'  'selections'eld",
+       'kind'":'Field'd": "Name"'name'ue":'kind'Li'Name'
+ 'value'"a'userList' [{
+        'arguments'Argument",
+    'kind'"n'Argument'ind": "Name"'name'ue":'kind'et'Name'  'value'"v'offset' "kind": "Vari'value'"nam'kind'"k'Variable'e"'name'ue":'kind'et'Name'  'value', 'offset'    ,"kind": "Argument",
+    'kind'"n'Argument'ind": "Name"'name'ue":'kind't"'Name'  'value'va'limit' "kind": "Vari'value'"nam'kind'"k'Variable'e"'name'ue":'kind't"'Name'  'value' {'limit'    ,"kind": "Argument",
+    'kind'"n'Argument'ind": "Name"'name'ue":'kind'e"'Name'  'value'va'where' "kind": "Vari'value'"nam'kind'"k'Variable'e"'name'ue":'kind'e"'Name'  'value',
+'where' "se,lectionSet": {
+      'selectionSet'electionSet",
+'kind'  'SelectionSet': [{
+       'selections' "Field",
+       'kind'na'Field'"kind": "Name"'name'ue":'kind's"'Name'  'value' "'nodes'onSet": {
+      'selectionSet': "SelectionSet",
+'kind'  'SelectionSet'ons": [{ "kind":'selections'ame":'kind'nd'Field'e"'name'ue":'kind'} 'Name'  'value'  'id'"kind": "Field",
+       'kind'  'Field': { "kind": "Name"'name'ue":'kind'na'Name'  'value'  'nickname'in,d": "Field", "name":'kind'nd'Field'e"'name'ue":'kind'l"'Name'{
+'value'  'email'"kind": "Field",
+       'kind'  'Field': { "kind": "Name"'name'ue":'kind'ar'Name'  'value'  'avatar'in,d": "Field", "name":'kind'nd'Field'e"'name'ue":'kind'us'Name' {'value'  'status'"kind": "Field",
+       'kind'  'Field': { "kind": "Name"'name'ue":'kind'te'Name'
+ 'value'  'createdAt'in,d": "Field", "name":'kind'nd'Field'e"'name'ue":'kind'mi'Name']
+'value'  'isAdmin'     , }]
+        }
+,      }]
+    ,}
+  }]
+} a,s unknown, as Do,cumen,tNode<UserListQuery, UserListQueryVariables>;
+export const MessageSuDocument = {
+  "kind": "Document",
+  "d'kind'io'Document'  "k'definitions'ionDefini'kind'
+ 'OperationDefinition'cripti'operation'am'subscription'"Name"'name'ue":'kind'ag'Name'},'value'el'MessageSub'{
+      'selectionSet'tionSet",
+'kind'"s'SelectionSet'
+       'selections'eld",
+       'kind'":'Field'd": "Name"'name'ue":'kind'ag'Name'" 'value'  'messageAdded't": {
+      'selectionSet'electionSet",
+'kind'  'SelectionSet': [{ "kind":'selections'ame":'kind'nd'Field'e"'name'ue":'kind'} 'Name'  'value'  'id'd": "Field",
+       'kind'na'Field'"kind": "Name"'name'ue":'kind'er'Name'  'value', 'sender': ,"Field", "name":'kind'nd'Field'e"'name'ue":'kind'" 'Name'
+ 'value'  'type'd": "Field",
+       'kind'na'Field'"kind": "Name"'name'ue":'kind'en'Name'  'value'},'content': ,"Field", "name":'kind'nd'Field'e"'name'ue":'kind'en'Name' }'value'  'contentType'd": "Field",
+       'kind'na'Field'"kind": "Name"'name'ue":'kind'da'Name'  'value' }'metadata': ,"Field", "name":'kind'nd'Field'e"'name'ue":'kind'te'Name' }'value'  'createdAt'
+    ,}
+  }]
+} a,s unknown, as Do,cumen,tNode<MessageSubSubscription, MessageSubSubscriptionVariables>;
+export const OrderDiretionMap = {
+  ASC: "Specifies an ascending 'Specifies an ascending order for a given `orderBy` argument.'escending 'Specifies a descending order for a given `orderBy` argument.'nst PermissinTypeMap = {
+  element: "元素",
+  menu: "目录",
+  pa'元素'"页面",
+} as'目录'st;
+
+expor'页面'nst UserRoleap = {
+  SystemAdmin: "系统后台管理员",
+  TenantOwner'系统后台管理员'r",
+  TenantUser:'租户Owner'} as const;
+
+exp'租户成员'nst UserStatsMap = {
+  freeze: "冻结",
+  normal: "正常",
+} '冻结'onst;
+
+expor'正常'nst VerifyCoeTypeMap = {
+  ForgetPassword: "忘记密码",
+  Register: "注册验'忘记密码'as const;

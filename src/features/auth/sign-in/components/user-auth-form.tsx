@@ -3,12 +3,12 @@ import { z } from 'zod'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Link, useNavigate } from '@tanstack/react-router'
-import { graphql } from '@/gql'
+import { LoginMutation } from '@/graphql/mutations/login.tsx'
 import { Loader2, LogIn } from 'lucide-react'
 import { useMutation } from 'urql'
 import { IconFacebook, IconGithub } from '@/assets/brand-icons'
-import { useAuthStore } from '@/stores/auth-store'
 import { cn } from '@/lib/utils'
+import { useAuth } from '@/context/auth-context.tsx'
 import { Button } from '@/components/ui/button'
 import {
   Form,
@@ -42,7 +42,7 @@ export function UserAuthForm({
 }: UserAuthFormProps) {
   const [isLoading, setIsLoading] = useState(false)
   const navigate = useNavigate()
-  const { auth } = useAuthStore()
+  const { login } = useAuth()
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -52,23 +52,6 @@ export function UserAuthForm({
     },
   })
 
-  const LoginMutation = graphql(/* GraphQL */ `
-    mutation login($email: String!, $password: String!) {
-      login(email: $email, password: $password) {
-        exp
-        token
-        user {
-          id
-          email
-          nickname
-          avatar
-          status
-          createdAt
-          isAdmin
-        }
-      }
-    }
-  `)
   const [_, executeMutation] = useMutation(LoginMutation)
 
   function onSubmit(data: z.infer<typeof formSchema>) {
@@ -79,14 +62,12 @@ export function UserAuthForm({
     }).then((result) => {
       setIsLoading(false)
       const user = result.data?.login.user
-      auth.setUser({
+      login(result.data?.login.token ?? '', {
         id: user?.id ?? '',
         nickname: user?.nickname ?? '',
         email: user?.email ?? '',
         avatar: user?.avatar ?? '',
-        exp: result.data?.login.exp ?? 0,
       })
-      auth.setAccessToken(result.data?.login.token ?? '')
 
       // Redirect to the stored location or default to dashboard
       const targetPath = redirectTo || '/'

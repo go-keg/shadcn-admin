@@ -7,10 +7,19 @@ import {
   QueryClientProvider,
 } from '@tanstack/react-query'
 import { createRouter, RouterProvider } from '@tanstack/react-router'
+import '@ant-design/v5-patch-for-react-19'
+import { createClient as createWSClient } from 'graphql-ws'
 import { toast } from 'sonner'
-import { cacheExchange, Client, fetchExchange, Provider } from 'urql'
+import {
+  cacheExchange,
+  Client,
+  fetchExchange,
+  Provider,
+  subscriptionExchange,
+} from 'urql'
 import { useAuthStore } from '@/stores/auth-store'
 import { handleServerError } from '@/lib/handle-server-error'
+import { AuthProvider } from '@/context/auth-cntext.tsx'
 import { DirectionProvider } from './context/direction-provider'
 import { FontProvider } from './context/font-provider'
 import { ThemeProvider } from './context/theme-provider'
@@ -70,9 +79,36 @@ const queryClient = new QueryClient({
   }),
 })
 
+const wsClient = createWSClient({
+  url: 'ws://127.0.0.1:9001/query',
+  connectionParams: async () => {
+    // 可以是异步函数
+    const token = useAuthStore.getState().auth.accessToken
+    return {
+      Authorization: token ? `Bearer ${token}` : '',
+      'X-ACCOUNT-ID': 1,
+      clientVersion: '1.0.0',
+    }
+  },
+})
+
 const gqlClient = new Client({
   url: 'http://127.0.0.1:9001/query',
-  exchanges: [cacheExchange, fetchExchange],
+  exchanges: [
+    cacheExchange,
+    fetchExchange,
+    subscriptionExchange({
+      forwardSubscription(request) {
+        const input = { ...request, query: request.query || '' }
+        return {
+          subscribe(sink) {
+            const unsubscribe = wsClient.subscribe(input, sink)
+            return { unsubscribe }
+          },
+        }
+      },
+    }),
+  ],
   fetchOptions: () => {
     const token = useAuthStore.getState().auth.accessToken
     return {
@@ -104,13 +140,15 @@ if (!rootElement.innerHTML) {
     <StrictMode>
       <Provider value={gqlClient}>
         <QueryClientProvider client={queryClient}>
-          <ThemeProvider>
-            <FontProvider>
-              <DirectionProvider>
-                <RouterProvider router={router} />
-              </DirectionProvider>
-            </FontProvider>
-          </ThemeProvider>
+          <AuthProvider>
+            <ThemeProvider>
+              <FontProvider>
+                <DirectionProvider>
+                  <RouterProvider router={router} />
+                </DirectionProvider>
+              </FontProvider>
+            </ThemeProvider>
+          </AuthProvider>
         </QueryClientProvider>
       </Provider>
     </StrictMode>

@@ -104,6 +104,28 @@ export const sidebarData: SidebarData = {
           ],
         },
         {
+          title: 'Examples',
+          icon: ShieldCheck,
+          items: [
+            {
+              title: 'Table',
+              url: '/examples/table',
+            },
+            {
+              title: 'DataTable',
+              url: '/examples/data-table',
+            },
+            {
+              title: 'WS',
+              url: '/examples/ws',
+            },
+            {
+              title: 'Profile',
+              url: '/examples/query',
+            },
+          ],
+        },
+        {
           title: 'Errors',
           icon: Bug,
           items: [

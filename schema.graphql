@@ -1081,7 +1081,7 @@ input SendMessageInput {
 }
 
 type Subscription {
-  messageAdded: Message!
+  messageReceived: Message!
 }
 
 type Tenant implements Node {

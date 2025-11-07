@@ -19,7 +19,7 @@ import {
 } from 'urql'
 import { useAuthStore } from '@/stores/auth-store'
 import { handleServerError } from '@/lib/handle-server-error'
-import { AuthProvider } from '@/context/auth-cntext.tsx'
+import { AuthProvider } from './context/auth-context'
 import { DirectionProvider } from './context/direction-provider'
 import { FontProvider } from './context/font-provider'
 import { ThemeProvider } from './context/theme-provider'

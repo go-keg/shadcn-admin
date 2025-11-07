@@ -8,7 +8,7 @@ export const Route = createFileRoute('/_authenticated/examples/ws')({
 
 const newMessages = gql`
   subscription MessageSub {
-    messageAdded {
+    messageReceived {
       id
       sender
       type
@@ -21,11 +21,11 @@ const newMessages = gql`
 `
 
 function RouteComponent() {
-  type Message = MessageSubSubscription['messageAdded']
+  type Message = MessageSubSubscription['messageReceived']
   const [result] = useSubscription(
     { query: newMessages },
     (messages: Message[] = [], response: MessageSubSubscription) => {
-      return [response.messageAdded, ...messages]
+      return [response.messageReceived, ...messages]
     }
   )
   if (!result.data) {

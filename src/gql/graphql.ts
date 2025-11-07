@@ -392,11 +392,10 @@ export type MutationUpdateOrganizationArgs = {
   input: UpdateOrganizationInput
 }
 
-
 export type MutationUpdatePermissionArgs = {
-  id: Scalars['ID']['input'];
-  input: UpdatePermissionInput;
-};
+  id: Scalars['ID']['input']
+  input: UpdatePermissionInput
+}
 
 
 export type MutationUpdateProfileArgs = {
@@ -1971,7 +1970,7 @@ export cnst MessageSubDocument = {
 export cnst OrderDirectionMap = {
   ASC: "Specifies'Specifies an ascending order for a given `orderBy` argument.'"Specifies'Specifies a descending order for a given `orderBy` argument.'st;
 
-export const PermissionTypeMap = {
+export onst PermissionTypeMap = {
   element: "元素",
   menu: "目录",
   page: '页面',

@@ -19,14 +19,14 @@ type Documents = {
    '\n  fragment UserInfo on User {\n    id\n    email\n    nickname\n    avatar\n    status\n    createdAt\n    isAdmin\n  }\n'": typeof types.UserInfoFragmentDoc,
    '\n  query profile {\n    profile {\n      ...UserInfo\n    }\n  }\n'": typeof types.ProfileDocument,
    '\n  query userList($offset: Int! = 0, $limit: Int! = 10, $where: UserWhereInput) {\n    userList(offset: $offset, limit: $limit, where: $where) {\n      nodes {\n        id\n        nickname\n        email\n        avatar\n        status\n        createdAt\n        isAdmin\n      }\n    }\n  }\n'": typeof types.UserListDocument,
-   '\n    subscription MessageSub {\n        messageReceived {\n            id\n            sender\n            type\n            content\n            contentType\n            metadata\n            createdAt\n        }\n    }\n'": typeof types.MessageSubDocument,
+   '\n  subscription MessageSub {\n    messageReceived {\n      id\n      sender\n      type\n      content\n      contentType\n      metadata\n      createdAt\n    }\n  }\n'": typeof types.MessageSubDocument,
 };
 const documents: Documents = {
     '\n  mutation login($email: String!, $password: String!) {\n    login(email: $email, password: $password) {\n      exp\n      token\n      user {\n        ...UserInfo\n      }\n    }\n  }\n': types.LoginDocument,
     '\n  fragment UserInfo on User {\n    id\n    email\n    nickname\n    avatar\n    status\n    createdAt\n    isAdmin\n  }\n': types.UserInfoFragmentDoc,
     '\n  query profile {\n    profile {\n      ...UserInfo\n    }\n  }\n': types.ProfileDocument,
     '\n  query userList($offset: Int! = 0, $limit: Int! = 10, $where: UserWhereInput) {\n    userList(offset: $offset, limit: $limit, where: $where) {\n      nodes {\n        id\n        nickname\n        email\n        avatar\n        status\n        createdAt\n        isAdmin\n      }\n    }\n  }\n': types.UserListDocument,
-    '\n    subscription MessageSub {\n        messageReceived {\n            id\n            sender\n            type\n            content\n            contentType\n            metadata\n            createdAt\n        }\n    }\n': types.MessageSubDocument,
+    '\n  subscription MessageSub {\n    messageReceived {\n      id\n      sender\n      type\n      content\n      contentType\n      metadata\n      createdAt\n    }\n  }\n': types.MessageSubDocument,
 };
 
 /**
@@ -62,7 +62,7 @@ export function graphql(source: '\n  query userList($offset: Int! = 0, $limit: I
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: '\n    subscription MessageSub {\n        messageReceived {\n            id\n            sender\n            type\n            content\n            contentType\n            metadata\n            createdAt\n        }\n    }\n'): (typeof documents)['\n    subscription MessageSub {\n        messageReceived {\n            id\n            sender\n            type\n            content\n            contentType\n            metadata\n            createdAt\n        }\n    }\n'];
+export function graphql(source: '\n  subscription MessageSub {\n    messageReceived {\n      id\n      sender\n      type\n      content\n      contentType\n      metadata\n      createdAt\n    }\n  }\n'): (typeof documents)['\n  subscription MessageSub {\n    messageReceived {\n      id\n      sender\n      type\n      content\n      contentType\n      metadata\n      createdAt\n    }\n  }\n'];
 
 export function graphql(source: string) {
   return (documents as any)[source] ?? {};

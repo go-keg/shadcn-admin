@@ -387,11 +387,10 @@ export type MutationUpdateMembershipArgs = {
   input: UpdateMembershipInput
 }
 
-
 export type MutationUpdateOrganizationArgs = {
-  id: Scalars['ID']['input'];
-  input: UpdateOrganizationInput;
-};
+  id: Scalars['ID']['input']
+  input: UpdateOrganizationInput
+}
 
 
 export type MutationUpdatePermissionArgs = {
@@ -1879,7 +1878,6 @@ export type UserListQuery = {
 
 export type MessageSubSubscriptionVariables = Exact<{ [key: string]: never }>
 
-
 export type MessageSubSubscription = {
   __typename?: 'Subscription'
   messageReceived: {
@@ -1895,107 +1893,83 @@ export type MessageSubSubscription = {
 }
 
 export const UserInfoFragmentDoc = {
-  kind: 'Do'kind'','Document'ions'definitions'   kind: 'kind'en'FragmentDefinition''name': 'N'kind'va'Name'Us'value' }'UserInfo'peCondit'typeCondition'kind'kind'ed'NamedType'  'name': { 'kind''N'Name'va'value'se'User'      },
- 'selectionSet'{
-   'kind'in'SelectionSet'et',
-   'selections''kind'  'Field'in'name'eld''kind': 'Name': 'value' v'id': 'id' } },
-    'kind'{
-'Field'     'name'd',
-'kind'  'Name'me'value''email', ,value: 'emai'kind'  'Field' }'name'    'kind'nd'Name'ld'value': 'nickname'ame', value: 'ni'kind'' 'Field'        {
-'name'    'kind': 'Name'','value'  'avatar': ,{ kind: 'Nam'kind'lu'Field'ta'name'    'kind'},'Name'  'value'nd'status'', name: { kind:'kind'','Field' 'status' 'name'    'kind'
- 'Name'  'value': 'createdAt'  ,        name'kind'nd'Field'','name': 'c'kind'At'Name'  'value'},'isAdmin'  { k,ind: ',Field,', name: { 'Name', value: 'isAdmin' } },
-        ]
-      },
-    },
-  ],
-} as unknown'kind'cu'Document'se'definitions', unknown'kind'rt'OperationDefinition'= {
-  'operation'cu'mutation'finiti'name'[{
- 'kind'nd'Name'er'value'fi'login',
-    "o'variableDefinitions',
-    "name'kind'ki'VariableDefinition': "login'variable'vari'kind'fi'Variable'[{'name' "ki'kind'Va'Name'De'value'n"'email' "variable":'type'nd":'kind'ab'NonNullType'{ 'type': "N'kind'"v'NamedType'il'name'
-   'kind'pe'Name'ki'value'on'String'", "ty,pe": { "kind": "'kind'yp'VariableDefinition': "Name"'variable' "St'kind'} 'Variable' {'name' "ki'kind'Va'Name'De'value'n"'password'ariable": { 'type': "V'kind'e"'NonNullType'ki'type'Name'kind'lu'NamedType'rd'name'
-   'kind'pe'Name'ki'value'on'String'", "ty,pe": { "kind"'selectionSet' "name": {'kind'":'SelectionSet'e": "Str'selections'   }],
-    "s'kind'on'Field'
-      "ki'name'Sele'kind'et'Name'  'value'ti'login'{
-        "k'arguments'd",
-        "na'kind' "'Argument'me", "value"'name'in" 'kind'  'Name'gu'value' ['email'     "kind": "'value't",
-'kind'  'Variable'{ 'name': "N'kind'"v'Name' "'value'},'email'    ,"value": { "kind": "Vari'kind' "'Argument'kind": "Name'name'lue"'kind'il'Name'  'value', 'password'  "kind": "Arg'value'
-   'kind' "'Variable'ki'name'Name'kind'lu'Name'as'value'},'password' "va,lue": { "kind": "Vari'selectionSet' { "kind": "Na'kind'va'SelectionSet'd" } }
-     'selections'   "s'kind'on'Field'
- 'name'   "'kind' "'Name'io'value'  'exp'   "selections": [{ 'kind': 'Field', "name": { "k'name'"Nam'kind'al'Name'ex'value' {'token'  ,    "kind": "Field",
-       'kind'na'Field'"kind": "Name"'name'ue":'kind'n"'Name'  'value' {'user'       "kind": "'selectionSet'      "name": { "k'kind'"N'SelectionSet' "user" },
-     'selections'ction'kind'{
-'FragmentSpread'in'name'elec'kind't"'Name'  'value' "'UserInfo'": [{, "kind": "Frag,mentSpread", ,"name": { ,"kind": ",Name",, "value": "U'kind'o"'FragmentDefinition'      'name'
-   'kind'
- 'Name']
-'value' }'UserInfo'ind": "F'typeCondition'on",'kind'na'NamedType'd"'name'e", 'kind'":'Name'In'value'  'User'eCondition'selectionSet'NamedType"'kind'e"'SelectionSet'ame", "v'selections'" } }'kind'"s'Field'nS'name'
-   'kind'nd'Name'le'value't"'id'    "selections"'kind'ki'Field'ield", "na'name' "ki'kind'Na'Name'va'value'id'email'{
-,        "kin'kind'ie'Field'  'name'ame"'kind'in'Name'am'value'lu'nickname'" }
-      }, { "'kind' "'Field' "name": {'name'": "'kind' "'Name': 'value'me'avatar'
- ,       "kind'kind'el'Field'  'name'me":'kind'nd'Name'me'value'ue'status'ar" }
-      }, {'kind'":'Field'", "name":'name'nd":'kind'",'Name'e"'value'us'createdAt'  ,    "kind": 'kind'",'Field'  'name': { 'kind': 'Name', 'value': 'isAdmin't" }
-,      ,}, { ,"kind": "Field", "name": { "kind": "Name", "value": "isAdmin" } }]
-   }
-  }]
-} as unknown as DocumentNod'kind'nM'Document'ogin'definitions'bles>;
-ex'kind'on'OperationDefinition'{
-  "k'operation'me'query'"defin'name'": ['kind'"k'Name'"O'value'nD'profile'",
-    "'selectionSet'uery",
-   'kind'":'SelectionSet'me", "va'selections'le" },
-    "s'kind'on'Field'
-      "ki'name'Sele'kind'et'Name'  'value'ti'profile'        "kin'selectionSet'       "name":'kind'nd'SelectionSet'lue": "profi'selections'   "s'kind'on'FragmentSpread'  'name': "S'kind'on'Name'  'value' "'UserInfo'": [{, "kind": ",FragmentS,pread",, "name": { 'kind': 'FragmentDefinition'erInfo'name'
-   'kind'
- 'Name']
-'value' }'UserInfo'ind": "F'typeCondition'on",'kind'na'NamedType'd"'name'e", 'kind'":'Name'In'value'  'User'eCondition'selectionSet'NamedType"'kind'e"'SelectionSet'ame", "v'selections'" } }'kind'"s'Field'nS'name'
-   'kind'nd'Name'le'value't"'id'    "selections"'kind'ki'Field'ield", "na'name' "ki'kind'Na'Name'va'value'id'email'{
-,        "kin'kind'ie'Field'  'name'ame"'kind'in'Name'am'value'lu'nickname'" }
-      }, { "'kind' "'Field' "name": {'name'": "'kind' "'Name': 'value'me'avatar'
- ,       "kind'kind'el'Field'  'name'me":'kind'nd'Name'me'value'ue'status'ar" }
-      }, {'kind'":'Field'", "name":'name'nd":'kind'",'Name'e"'value'us'createdAt'  ,    "kind": 'kind'",'Field'  'name': { 'kind': 'Name', 'value': 'isAdmin't" }
-,      ,}, { ,"kind": "Field", "name": { "kind": "Name", "value": "isAdmin" } }]    }
-  }]
-} as unknown as DocumentNo'kind'fi'Document'ro'definitions'ables>;
-e'kind'co'OperationDefinition'= {
-  'operation'cu'query'"defin'name'": ['kind'"k'Name'"O'value'nD'userList',
-    "o'variableDefinitions'   "name": 'kind'd"'VariableDefinition'userList'variable'vari'kind'fi'Variable'[{'name' "ki'kind'Va'Name'De'value'n"'offset'"variable": 'type'd": 'kind'bl'NonNullType' "'type' "Na'kind'va'NamedType'et'name'
-   'kind'pe'Name'ki'value'on'Int'ype", "type": 'defaultValue'edTy'kind'na'IntValue'nd'value'e"'0'va,lue": "Int" } } 'kind'  'VariableDefinition'kind": "'variable' "va'kind'"0'Variable' {'name' "ki'kind'Va'Name'De'value'n"'limit' "variable":'type'nd":'kind'ab'NonNullType'{ 'type': "N'kind'"v'NamedType'it'name'
-   'kind'pe'Name'ki'value'on'Int'ype", "type": 'defaultValue'edTy'kind'na'IntValue'nd'value'e"'10'al,ue": "Int" } } }'kind'  'VariableDefinition'ind": "I'variable'"val'kind'10'Variable' {'name' "ki'kind'Va'Name'De'value'n"'where' "variable":'type'nd":'kind'ab'NamedType': 'name'd": 'kind', 'Name'":'value'" 'UserWhereInput'": {, "kind": "Nam'selectionSet'": { "kind'kind'me'SelectionSet'se'selections' } }
-    }],
-'kind'el'Field'et": {
-   'name'nd":'kind'ct'Name'",'value'ti'userList'       "kind'arguments'
-        "name"'kind'in'Argument', "value": "'name'st" 'kind'  'Name'gu'value' ['offset'    "kind": "A'value'",
- 'kind'  'Variable' "'name' "Na'kind'va'Name'"o'value'},'offset'   ",value": { "kind": "Varia'kind'"n'Argument'ind": "Name"'name'ue":'kind'et'Name'  'value', 'limit'     "kind": "'value't",
-'kind'  'Variable'{ 'name': "N'kind'"v'Name' "'value'},'limit'    ,"value": { "kind": "Vari'kind' "'Argument'kind": "Name'name'lue"'kind'it'Name'  'value', 'where'     "kind": "'value't",
-'kind'  'Variable'{ 'name': "N'kind'"v'Name' "'value'},'where'    ,"value": { "kind": "V'selectionSet'e": { "kind": 'kind', 'SelectionSet'e" } }
-     'selections'   "selectionSet"'kind'  'Field'kind": "Select'name'",
- 'kind'  'Name'ct'value'[{'nodes'      "kind": "F'selectionSet'     "name": { "ki'kind'Na'SelectionSet'"nodes" },
-     'selections'ction'kind'{
-'Field'  'name'kind'kind'le'Name'et'value'  'id'    "selections": [{ "ki'kind'Fi'Field'name": { "kind": "'name' "va'kind'"i'Name', 'value'  'nickname'ki,nd": "Field",
-      'kind'  'Field'":'name'nd":'kind'",'Name'e"'value'na'email'             }, { "kind"'kind'ld'Field'e": { "kind": "Nam'name'alue'kind'ai'Name', 'value'  'avatar' ",kind": "Field",
-    'kind'  'Field'me'name'kind'kind'me'Name'lu'value'at'status'            }, { "kind":'kind'd"'Field'": { "kind": "Name'name'lue"'kind'tu'Name', 'value'  'createdAt'in,d": "Field",
-       'kind'  'Field': 'name'd": 'kind', 'Name'":'value'ed'isAdmin'     ,      }, { "ki,nd": "Field",, "name": {, "kind": ,"Name",, "va,lue": "isAdmin" } }]
-            }
-          }]
-        }
+  "kind": "D'kind't"'Document'itio'definitions'kind": "F'kind'tD'FragmentDefinition'e": { 'name': "N'kind'"v'Name' "'value'o"'UserInfo'ypeCondi'typeCondition': "N'kind'pe'NamedType'{ 'name': "N'kind'"v'Name' "'value' }'User'"selection'selectionSet'"kind": "S'kind'on'SelectionSet'election'selections'": "F'kind' "'Field'{ 'name': "N'kind'"v'Name' "'value', 'id'      "kind": "F'kind'
+ 'Field'"name": { 'name': "N'kind'"v'Name' "'value'}
+'email', ,{ "kind": "F'kind' "'Field'{ 'name': "N'kind'"v'Name' "'value'e"'nickname'      "kind": "F'kind'
+ 'Field'"name": { 'name': "N'kind'"v'Name' "'value' }'avatar', ,{ "kind": "F'kind' "'Field'{ 'name': "N'kind'"v'Name' "'value' }'status'      "kind": "F'kind'
+ 'Field'"name": { 'name': "N'kind'"v'Name' "'value'At'createdAt', ,{ "kind": "F'kind' "'Field'{ 'name': "N'kind'"v'Name' "'value'" 'isAdmin'}
+  },]
+} as, unkn,own as DocumentNode<UserInfoFragment, unknown>;
+export cnst LoginDocument = {
+  "kind": "D'kind't"'Document'io'definitions'kind": "O'kind'on'OperationDefinition'ration'operation'n"'mutation'e": { 'name': "N'kind'"v'Name' "'value'},'login'ariableD'variableDefinitions' "kind": "V'kind'eD'VariableDefinition'ariable"'variable': "V'kind'e"'Variable'{ 'name': "N'kind'"v'Name' "'value'} 'email'  "type": { 'type': "N'kind'Ty'NonNullType'{ 'type': "N'kind'pe'NamedType'{ 'name': "N'kind'"v'Name' "'value' }'String' }, {
+,      "kind": "V'kind'eD'VariableDefinition'ariable"'variable': "V'kind'e"'Variable'{ 'name': "N'kind'"v'Name' "'value'd"'password'  "type": { 'type': "N'kind'Ty'NonNullType'{ 'type': "N'kind'pe'NamedType'{ 'name': "N'kind'"v'Name' "'value' }'String' }],
+ ,   "selection'selectionSet'"kind": "S'kind'on'SelectionSet'election'selections'   "kind": "F'kind'
+ 'Field'"name": { 'name': "N'kind'"v'Name' "'value'},'login'  "arguments'arguments'     "kind": "A'kind't"'Argument'  "name": { 'name': "N'kind'"v'Name' "'value'},'email'    "value": {'value': "V'kind'e"'Variable'{ 'name': "N'kind'"v'Name' "'value'} 'email'   },, {
+          "kind": "A'kind't"'Argument'  "name": { 'name': "N'kind'"v'Name' "'value'd"'password'    "value": {'value': "V'kind'e"'Variable'{ 'name': "N'kind'"v'Name' "'value'd"'password'   },],
+        "selection'selectionSet'    "kind": "S'kind'on'SelectionSet'  "selection'selections'": "F'kind' "'Field'{ 'name': "N'kind'"v'Name' "'value'},'exp'          "kind": "F'kind'
+ 'Field'    "name": { 'name': "N'kind'"v'Name' "'value'}
+'token'  , }, {
+            "kind": "F'kind'
+ 'Field'    "name": { 'name': "N'kind'"v'Name' "'value',
+'user'      "selection'selectionSet'        "kind": "S'kind'on'SelectionSet'      "selection'selections'": "F'kind'tS'FragmentSpread'{ 'name': "N'kind'"v'Name' "'value'o"'UserInfo'     ,   }
+         , }]
+        },
       }]
-   }
-  }]
-} as unknown as DocumentNode<U'kind'tQ'Document'List'definitions's>;
-expor'kind't 'OperationDefinition'{
-  "k'operation'me'subscription'tions"'name'   "'kind' "'Name'io'value'ti'MessageSub'eration"'selectionSet'n",
-    "n'kind'{ 'SelectionSet', "value'selections'ub" },
-    "s'kind'on'Field'
-      "ki'name'Sele'kind'et'Name'  'value'ti'messageReceived'"kind": "Fie'selectionSet'name": { "kind'kind'me'SelectionSet'essageReceiv'selections'   "s'kind'on'Field'
- 'name'   "'kind' "'Name'io'value'  'id'    "selections": [{'kind'":'Field'", "name": { "'name' "Na'kind'va'Name'"i'value' {'sender'  ,   "kind": "Fiel'kind'  'Field' "'name' { "'kind' "'Name' "'value' "'type'" }
-          }, { "'kind' "'Field' "name": { "ki'name'Name'kind'lu'Name'yp'value' {'content'  ,  "kind": "Field'kind'  'Field'"n'name'{ "k'kind'"N'Name'"v'value'"c'contentType'       }, { "kind": 'kind'",'Field': { "kind": "N'name'"val'kind'co'Name'yp'value' {'metadata'  , "kind": "Field"'kind'  'Field'na'name' "ki'kind'Na'Name'va'value'me'createdAt'     ,    }, { ",kind": "F,ield",, "nam,e": { "kind": "Name", "value": "createdAt" } }]
-        }
+,    }
+  },, {
+  ,  "kind": "F'kind'tD'FragmentDefinition'e": { 'name': "N'kind'"v'Name' "'value'o"'UserInfo'ypeCondi'typeCondition': "N'kind'pe'NamedType'{ 'name': "N'kind'"v'Name' "'value' }'User'"selection'selectionSet'"kind": "S'kind'on'SelectionSet'election'selections'": "F'kind' "'Field'{ 'name': "N'kind'"v'Name' "'value', 'id'      "kind": "F'kind'
+ 'Field'"name": { 'name': "N'kind'"v'Name' "'value'}
+'email', ,{ "kind": "F'kind' "'Field'{ 'name': "N'kind'"v'Name' "'value'e"'nickname'      "kind": "F'kind'
+ 'Field'"name": { 'name': "N'kind'"v'Name' "'value' }'avatar', ,{ "kind": "F'kind' "'Field'{ 'name': "N'kind'"v'Name' "'value' }'status'      "kind": "F'kind'
+ 'Field'"name": { 'name': "N'kind'"v'Name' "'value'At'createdAt', ,{ "kind": "F'kind' "'Field'{ 'name': "N'kind'"v'Name' "'value'" 'isAdmin'}
+  },]
+} as, unkn,own as DocumentNode<LoginMutation, LoginMutationVariables>;
+export cnst ProfileDocument = {
+  "kind": "D'kind't"'Document'itio'definitions'kind": "O'kind'on'OperationDefinition'ration'operation'
+ 'query'e": { 'name': "N'kind'"v'Name' "'value'" 'profile'election'selectionSet'"kind": "S'kind'on'SelectionSet'election'selections'   "kind": "F'kind'
+ 'Field'"name": { 'name': "N'kind'"v'Name' "'value'" 'profile'  "selection'selectionSet'    "kind": "S'kind'on'SelectionSet'  "selection'selections'": "F'kind'tS'FragmentSpread'{ 'name': "N'kind'"v'Name' "'value'o"'UserInfo'    },
       }]
-    }
-  }]
-} as unkown as DocumentNode<MessageSubSubscription,'Specifies an ascending order for a given `orderBy` argument.'Map = {
-  'Specifies a descending order for a given `orderBy` argument.'ent.",
-  DES: "Specifies a descending order for a given `orderBy` argument.",
-} as const;
+,    }
+  },, {
+  ,  "kind": "F'kind'tD'FragmentDefinition'e": { 'name': "N'kind'"v'Name' "'value'o"'UserInfo'ypeCondi'typeCondition': "N'kind'pe'NamedType'{ 'name': "N'kind'"v'Name' "'value' }'User'"selection'selectionSet'"kind": "S'kind'on'SelectionSet'election'selections'": "F'kind' "'Field'{ 'name': "N'kind'"v'Name' "'value', 'id'      "kind": "F'kind'
+ 'Field'"name": { 'name': "N'kind'"v'Name' "'value'}
+'email', ,{ "kind": "F'kind' "'Field'{ 'name': "N'kind'"v'Name' "'value'e"'nickname'      "kind": "F'kind'
+ 'Field'"name": { 'name': "N'kind'"v'Name' "'value' }'avatar', ,{ "kind": "F'kind' "'Field'{ 'name': "N'kind'"v'Name' "'value' }'status'      "kind": "F'kind'
+ 'Field'"name": { 'name': "N'kind'"v'Name' "'value'At'createdAt', ,{ "kind": "F'kind' "'Field'{ 'name': "N'kind'"v'Name' "'value'" 'isAdmin'}
+  },]
+} as, unkn,own as DocumentNode<ProfileQuery, ProfileQueryVariables>;
+export cnst UserListDocument = {
+  "kind": "D'kind't"'Document'io'definitions'kind": "O'kind'on'OperationDefinition'ration'operation'
+ 'query'e": { 'name': "N'kind'"v'Name' "'value't"'userList'ariableD'variableDefinitions' "kind": "V'kind'eD'VariableDefinition'ariable"'variable': "V'kind'e"'Variable'{ 'name': "N'kind'"v'Name' "'value' }'offset'  "type": { 'type': "N'kind'Ty'NonNullType'{ 'type': "N'kind'pe'NamedType'{ 'name': "N'kind'"v'Name' "'value'} 'Int'    "defaultVa'defaultValue': "I'kind'e"'IntValue' "'value'  '0'{
+,      "kind": "V'kind'eD'VariableDefinition'ariable"'variable': "V'kind'e"'Variable'{ 'name': "N'kind'"v'Name' "'value'} 'limit'  "type": { 'type': "N'kind'Ty'NonNullType'{ 'type': "N'kind'pe'NamedType'{ 'name': "N'kind'"v'Name' "'value'} 'Int'    "defaultVa'defaultValue': "I'kind'e"'IntValue' "'value'  '10'{
+,      "kind": "V'kind'eD'VariableDefinition'ariable"'variable': "V'kind'e"'Variable'{ 'name': "N'kind'"v'Name' "'value'} 'where'  "type": { 'type': "N'kind'pe'NamedType'{ 'name': "N'kind'"v'Name' "'value're'UserWhereInput'],
+ ,   "selection'selectionSet'"kind": "S'kind'on'SelectionSet'on'selections'   "kind": "F'kind'
+ 'Field'"name": { 'name': "N'kind'"v'Name' "'value't"'userList'  "arguments'arguments'     "kind": "A'kind't"'Argument'  "name": { 'name': "N'kind'"v'Name' "'value' }'offset'    "value": {'value': "V'kind'e"'Variable'{ 'name': "N'kind'"v'Name' "'value' }'offset'   },, {
+          "kind": "A'kind't"'Argument'  "name": { 'name': "N'kind'"v'Name' "'value'},'limit'    "value": {'value': "V'kind'e"'Variable'{ 'name': "N'kind'"v'Name' "'value'} 'limit'   },, {
+          "kind": "A'kind't"'Argument'  "name": { 'name': "N'kind'"v'Name' "'value'},'where'    "value": {'value': "V'kind'e"'Variable'{ 'name': "N'kind'"v'Name' "'value'} 'where'   },],
+        "selection'selectionSet'    "kind": "S'kind'on'SelectionSet'  "selection'selections'       "kind": "F'kind'
+ 'Field'    "name": { 'name': "N'kind'"v'Name' "'value'},'nodes'      "selection'selectionSet'        "kind": "S'kind'on'SelectionSet'      "selection'selections'": "F'kind' "'Field'{ 'name': "N'kind'"v'Name' "'value', 'id'              "kind": "F'kind'
+ 'Field'        "name": { 'name': "N'kind'"v'Name' "'value'e"'nickname'  ,     }, { "kind": "F'kind' "'Field'{ 'name': "N'kind'"v'Name' "'value'} 'email'              "kind": "F'kind'
+ 'Field'        "name": { 'name': "N'kind'"v'Name' "'value' }'avatar'  ,     }, { "kind": "F'kind' "'Field'{ 'name': "N'kind'"v'Name' "'value' }'status'              "kind": "F'kind'
+ 'Field'        "name": { 'name': "N'kind'"v'Name' "'value'At'createdAt'  ,     }, { "kind": "F'kind' "'Field'{ 'name': "N'kind'"v'Name' "'value'" 'isAdmin'     ,   }
+         , }]
+        },
+      }]
+,    }
+  },]
+} as, unkn,own as DocumentNode<UserListQuery, UserListQueryVariables>;
+export cnst MessageSubDocument = {
+  "kind": "D'kind't"'Document'itio'definitions'kind": "O'kind'on'OperationDefinition'ration'operation'pt'subscription'e": { 'name': "N'kind'"v'Name' "'value'Su'MessageSub'election'selectionSet'"kind": "S'kind'on'SelectionSet'election'selections'   "kind": "F'kind'
+ 'Field'"name": { 'name': "N'kind'"v'Name' "'value'Re'messageReceived'  "selection'selectionSet'    "kind": "S'kind'on'SelectionSet'  "selection'selections'": "F'kind' "'Field'{ 'name': "N'kind'"v'Name' "'value', 'id'          "kind": "F'kind'
+ 'Field'    "name": { 'name': "N'kind'"v'Name' "'value' }'sender'  , }, { "kind": "F'kind' "'Field'{ 'name': "N'kind'"v'Name' "'value' }'type'          "kind": "F'kind'
+ 'Field'    "name": { 'name': "N'kind'"v'Name' "'value'" 'content'  , }, { "kind": "F'kind' "'Field'{ 'name': "N'kind'"v'Name' "'value'Ty'contentType'          "kind": "F'kind'
+ 'Field'    "name": { 'name': "N'kind'"v'Name' "'value'a"'metadata'  , }, { "kind": "F'kind' "'Field'{ 'name': "N'kind'"v'Name' "'value'At'createdAt'    },
+      }]
+,    }
+  },]
+} as, unkn,own as DocumentNode<MessageSubSubscription, MessageSubSubscriptionVariables>;
+export cnst OrderDirectionMap = {
+  ASC: "Specifies'Specifies an ascending order for a given `orderBy` argument.'"Specifies'Specifies a descending order for a given `orderBy` argument.'st;
 
 export const PermissionTypeMap = {
   element: "元素",

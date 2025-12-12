@@ -1,7 +1,5 @@
 /* eslint-disable */
-import type { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/core'
-
-
+import type { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/core';
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = T | null | undefined;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
@@ -230,59 +228,59 @@ export enum MessageType {
 }
 
 export type Mutation = {
-  __typename?: 'Mutation'
+  __typename?: 'Mutation';
   /** 创建组织架构成员 */
-  createMembership: Membership
+  createMembership: Membership;
   /** 创建组织架构 */
-  createOrganization: Organization
+  createOrganization: Organization;
   /** 创建权限 */
-  createPermission: Permission
+  createPermission: Permission;
   /** 创建租户 */
-  createTenant: Tenant
+  createTenant: Tenant;
   /** 创建角色 */
-  createTenantRole: TenantRole
+  createTenantRole: TenantRole;
   /** 创建用户 */
-  createUser: User
+  createUser: User;
   /** 删除组织架构成员 */
-  deleteMembership: Scalars['Boolean']['output']
+  deleteMembership: Scalars['Boolean']['output'];
   /** 删除组织架构 */
-  deleteOrganization: Scalars['Boolean']['output']
+  deleteOrganization: Scalars['Boolean']['output'];
   /** 删除权限 */
-  deletePermission: Scalars['Boolean']['output']
+  deletePermission: Scalars['Boolean']['output'];
   /** 删除租户 */
-  deleteTenant: Scalars['Boolean']['output']
+  deleteTenant: Scalars['Boolean']['output'];
   /** 删除角色 */
-  deleteTenantRole: Scalars['Boolean']['output']
+  deleteTenantRole: Scalars['Boolean']['output'];
   /** 删除用户 */
-  deleteUser: Scalars['Boolean']['output']
+  deleteUser: Scalars['Boolean']['output'];
   /** 忘记密码 */
-  forgetPassword: Scalars['Boolean']['output']
-  linkGoogleAccount: Scalars['Boolean']['output']
+  forgetPassword: Scalars['Boolean']['output'];
+  linkGoogleAccount: Scalars['Boolean']['output'];
   /** 登陆 */
-  login: LoginReply
+  login: LoginReply;
   /** 刷新token */
-  refresh: LoginReply
+  refresh: LoginReply;
   /** 重置密码 */
-  resetPassword: Scalars['Boolean']['output']
-  sendMessage: Message
+  resetPassword: Scalars['Boolean']['output'];
+  sendMessage: Message;
   /** 发送验证码 */
-  sendVerifyCode: Scalars['Boolean']['output']
-  unlinkGoogleAccount: Scalars['Boolean']['output']
+  sendVerifyCode: Scalars['Boolean']['output'];
+  unlinkGoogleAccount: Scalars['Boolean']['output'];
   /** 修改组织架构成员 */
-  updateMembership: Membership
+  updateMembership: Membership;
   /** 修改组织架构 */
-  updateOrganization: Organization
+  updateOrganization: Organization;
   /** 修改权限 */
-  updatePermission: Permission
+  updatePermission: Permission;
   /** 修改个人信息 */
-  updateProfile: User
+  updateProfile: User;
   /** 修改租户 */
-  updateTenant: Tenant
+  updateTenant: Tenant;
   /** 修改角色 */
-  updateTenantRole: TenantRole
+  updateTenantRole: TenantRole;
   /** 修改用户 */
-  updateUser: User
-}
+  updateUser: User;
+};
 
 
 export type MutationCreateMembershipArgs = {
@@ -373,29 +371,32 @@ export type MutationResetPasswordArgs = {
 
 
 export type MutationSendMessageArgs = {
-  input: SendMessageInput
-}
+  input: SendMessageInput;
+};
 
 
 export type MutationSendVerifyCodeArgs = {
-  email: Scalars['String']['input']
-  verifyType: VerifyCodeType
-}
+  email: Scalars['String']['input'];
+  verifyType: VerifyCodeType;
+};
+
 
 export type MutationUpdateMembershipArgs = {
-  id: Scalars['ID']['input']
-  input: UpdateMembershipInput
-}
+  id: Scalars['ID']['input'];
+  input: UpdateMembershipInput;
+};
+
 
 export type MutationUpdateOrganizationArgs = {
-  id: Scalars['ID']['input']
-  input: UpdateOrganizationInput
-}
+  id: Scalars['ID']['input'];
+  input: UpdateOrganizationInput;
+};
+
 
 export type MutationUpdatePermissionArgs = {
-  id: Scalars['ID']['input']
-  input: UpdatePermissionInput
-}
+  id: Scalars['ID']['input'];
+  input: UpdatePermissionInput;
+};
 
 
 export type MutationUpdateProfileArgs = {
@@ -1193,30 +1194,30 @@ export type QueryUsersArgs = {
 };
 
 export type SendMessageInput = {
-  content: Scalars['String']['input']
-  contentType?: MessageContentType
-  metadata?: InputMaybe<Scalars['Map']['input']>
-  sender?: InputMaybe<Scalars['ID']['input']>
-  type?: MessageType
-}
+  content: Scalars['String']['input'];
+  contentType?: MessageContentType;
+  metadata?: InputMaybe<Scalars['Map']['input']>;
+  sender?: InputMaybe<Scalars['ID']['input']>;
+  type?: MessageType;
+};
 
 export type Subscription = {
-  __typename?: 'Subscription'
-  messageReceived: Message
-}
+  __typename?: 'Subscription';
+  messageReceived: Message;
+};
 
 export type Tenant = Node & {
-  __typename?: 'Tenant'
-  createdAt?: Maybe<Scalars['Time']['output']>
-  features?: Maybe<Array<Scalars['String']['output']>>
-  id: Scalars['ID']['output']
-  maxUsers: Scalars['Int']['output']
-  name: Scalars['String']['output']
-  organizations?: Maybe<Array<Organization>>
-  roles?: Maybe<Array<TenantRole>>
-  tenantUsers?: Maybe<Array<TenantUser>>
-  updatedAt?: Maybe<Scalars['Time']['output']>
-}
+  __typename?: 'Tenant';
+  createdAt?: Maybe<Scalars['Time']['output']>;
+  features?: Maybe<Array<Scalars['String']['output']>>;
+  id: Scalars['ID']['output'];
+  maxUsers: Scalars['Int']['output'];
+  name: Scalars['String']['output'];
+  organizations?: Maybe<Array<Organization>>;
+  roles?: Maybe<Array<TenantRole>>;
+  tenantUsers?: Maybe<Array<TenantUser>>;
+  updatedAt?: Maybe<Scalars['Time']['output']>;
+};
 
 /** Ordering options for Tenant connections */
 export type TenantOrder = {
@@ -1825,161 +1826,47 @@ export type LoginMutationVariables = Exact<{
 
 export type LoginMutation = { __typename?: 'Mutation', login: { __typename?: 'LoginReply', exp: number, token: string, user: { __typename?: 'User', id: string, email: string, nickname: string, avatar?: string | null, status: UserStatus, createdAt?: any | null, isAdmin: boolean } } };
 
-export type UserInfoFragment = {
-  __typename?: 'User'
-  id: string
-  email: string
-  nickname: string
-  avatar?: string | null
-  status: UserStatus
-  createdAt?: any | null
-  isAdmin: boolean
-}
+export type UserInfoFragment = { __typename?: 'User', id: string, email: string, nickname: string, avatar?: string | null, status: UserStatus, createdAt?: any | null, isAdmin: boolean };
 
-export type ProfileQueryVariables = Exact<{ [key: string]: never }>
+export type ProfileQueryVariables = Exact<{ [key: string]: never; }>;
 
-export type ProfileQuery = {
-  __typename?: 'Query'
-  profile: {
-    __typename?: 'User'
-    id: string
-    email: string
-    nickname: string
-    avatar?: string | null
-    status: UserStatus
-    createdAt?: any | null
-    isAdmin: boolean
-  }
-}
+
+export type ProfileQuery = { __typename?: 'Query', profile: { __typename?: 'User', id: string, email: string, nickname: string, avatar?: string | null, status: UserStatus, createdAt?: any | null, isAdmin: boolean } };
 
 export type UserListQueryVariables = Exact<{
-  offset?: Scalars['Int']['input']
-  limit?: Scalars['Int']['input']
-  where?: InputMaybe<UserWhereInput>
-}>
+  offset?: Scalars['Int']['input'];
+  limit?: Scalars['Int']['input'];
+  where?: InputMaybe<UserWhereInput>;
+}>;
 
-export type UserListQuery = {
-  __typename?: 'Query'
-  userList: {
-    __typename?: 'UserList'
-    nodes?: Array<{
-      __typename?: 'User'
-      id: string
-      nickname: string
-      email: string
-      avatar?: string | null
-      status: UserStatus
-      createdAt?: any | null
-      isAdmin: boolean
-    }> | null
-  }
-}
 
-export type MessageSubSubscriptionVariables = Exact<{ [key: string]: never }>
+export type UserListQuery = { __typename?: 'Query', userList: { __typename?: 'UserList', nodes?: Array<{ __typename?: 'User', id: string, nickname: string, email: string, avatar?: string | null, status: UserStatus, createdAt?: any | null, isAdmin: boolean }> | null } };
 
-export type MessageSubSubscription = {
-  __typename?: 'Subscription'
-  messageReceived: {
-    __typename?: 'Message'
-    id: string
-    sender?: string | null
-    type: MessageType
-    content: string
-    contentType: MessageContentType
-    metadata?: any | null
-    createdAt: any
-  }
-}
+export type MessageSubSubscriptionVariables = Exact<{ [key: string]: never; }>;
 
-export const UserInfoFragmentDoc = {
-  "kind": "D'kind't"'Document'itio'definitions'kind": "F'kind'tD'FragmentDefinition'e": { 'name': "N'kind'"v'Name' "'value'o"'UserInfo'ypeCondi'typeCondition': "N'kind'pe'NamedType'{ 'name': "N'kind'"v'Name' "'value' }'User'"selection'selectionSet'"kind": "S'kind'on'SelectionSet'election'selections'": "F'kind' "'Field'{ 'name': "N'kind'"v'Name' "'value', 'id'      "kind": "F'kind'
- 'Field'"name": { 'name': "N'kind'"v'Name' "'value'}
-'email', ,{ "kind": "F'kind' "'Field'{ 'name': "N'kind'"v'Name' "'value'e"'nickname'      "kind": "F'kind'
- 'Field'"name": { 'name': "N'kind'"v'Name' "'value' }'avatar', ,{ "kind": "F'kind' "'Field'{ 'name': "N'kind'"v'Name' "'value' }'status'      "kind": "F'kind'
- 'Field'"name": { 'name': "N'kind'"v'Name' "'value'At'createdAt', ,{ "kind": "F'kind' "'Field'{ 'name': "N'kind'"v'Name' "'value'" 'isAdmin'}
-  },]
-} as, unkn,own as DocumentNode<UserInfoFragment, unknown>;
-export cnst LoginDocument = {
-  "kind": "D'kind't"'Document'io'definitions'kind": "O'kind'on'OperationDefinition'ration'operation'n"'mutation'e": { 'name': "N'kind'"v'Name' "'value'},'login'ariableD'variableDefinitions' "kind": "V'kind'eD'VariableDefinition'ariable"'variable': "V'kind'e"'Variable'{ 'name': "N'kind'"v'Name' "'value'} 'email'  "type": { 'type': "N'kind'Ty'NonNullType'{ 'type': "N'kind'pe'NamedType'{ 'name': "N'kind'"v'Name' "'value' }'String' }, {
-,      "kind": "V'kind'eD'VariableDefinition'ariable"'variable': "V'kind'e"'Variable'{ 'name': "N'kind'"v'Name' "'value'd"'password'  "type": { 'type': "N'kind'Ty'NonNullType'{ 'type': "N'kind'pe'NamedType'{ 'name': "N'kind'"v'Name' "'value' }'String' }],
- ,   "selection'selectionSet'"kind": "S'kind'on'SelectionSet'election'selections'   "kind": "F'kind'
- 'Field'"name": { 'name': "N'kind'"v'Name' "'value'},'login'  "arguments'arguments'     "kind": "A'kind't"'Argument'  "name": { 'name': "N'kind'"v'Name' "'value'},'email'    "value": {'value': "V'kind'e"'Variable'{ 'name': "N'kind'"v'Name' "'value'} 'email'   },, {
-          "kind": "A'kind't"'Argument'  "name": { 'name': "N'kind'"v'Name' "'value'd"'password'    "value": {'value': "V'kind'e"'Variable'{ 'name': "N'kind'"v'Name' "'value'd"'password'   },],
-        "selection'selectionSet'    "kind": "S'kind'on'SelectionSet'  "selection'selections'": "F'kind' "'Field'{ 'name': "N'kind'"v'Name' "'value'},'exp'          "kind": "F'kind'
- 'Field'    "name": { 'name': "N'kind'"v'Name' "'value'}
-'token'  , }, {
-            "kind": "F'kind'
- 'Field'    "name": { 'name': "N'kind'"v'Name' "'value',
-'user'      "selection'selectionSet'        "kind": "S'kind'on'SelectionSet'      "selection'selections'": "F'kind'tS'FragmentSpread'{ 'name': "N'kind'"v'Name' "'value'o"'UserInfo'     ,   }
-         , }]
-        },
-      }]
-,    }
-  },, {
-  ,  "kind": "F'kind'tD'FragmentDefinition'e": { 'name': "N'kind'"v'Name' "'value'o"'UserInfo'ypeCondi'typeCondition': "N'kind'pe'NamedType'{ 'name': "N'kind'"v'Name' "'value' }'User'"selection'selectionSet'"kind": "S'kind'on'SelectionSet'election'selections'": "F'kind' "'Field'{ 'name': "N'kind'"v'Name' "'value', 'id'      "kind": "F'kind'
- 'Field'"name": { 'name': "N'kind'"v'Name' "'value'}
-'email', ,{ "kind": "F'kind' "'Field'{ 'name': "N'kind'"v'Name' "'value'e"'nickname'      "kind": "F'kind'
- 'Field'"name": { 'name': "N'kind'"v'Name' "'value' }'avatar', ,{ "kind": "F'kind' "'Field'{ 'name': "N'kind'"v'Name' "'value' }'status'      "kind": "F'kind'
- 'Field'"name": { 'name': "N'kind'"v'Name' "'value'At'createdAt', ,{ "kind": "F'kind' "'Field'{ 'name': "N'kind'"v'Name' "'value'" 'isAdmin'}
-  },]
-} as, unkn,own as DocumentNode<LoginMutation, LoginMutationVariables>;
-export cnst ProfileDocument = {
-  "kind": "D'kind't"'Document'itio'definitions'kind": "O'kind'on'OperationDefinition'ration'operation'
- 'query'e": { 'name': "N'kind'"v'Name' "'value'" 'profile'election'selectionSet'"kind": "S'kind'on'SelectionSet'election'selections'   "kind": "F'kind'
- 'Field'"name": { 'name': "N'kind'"v'Name' "'value'" 'profile'  "selection'selectionSet'    "kind": "S'kind'on'SelectionSet'  "selection'selections'": "F'kind'tS'FragmentSpread'{ 'name': "N'kind'"v'Name' "'value'o"'UserInfo'    },
-      }]
-,    }
-  },, {
-  ,  "kind": "F'kind'tD'FragmentDefinition'e": { 'name': "N'kind'"v'Name' "'value'o"'UserInfo'ypeCondi'typeCondition': "N'kind'pe'NamedType'{ 'name': "N'kind'"v'Name' "'value' }'User'"selection'selectionSet'"kind": "S'kind'on'SelectionSet'election'selections'": "F'kind' "'Field'{ 'name': "N'kind'"v'Name' "'value', 'id'      "kind": "F'kind'
- 'Field'"name": { 'name': "N'kind'"v'Name' "'value'}
-'email', ,{ "kind": "F'kind' "'Field'{ 'name': "N'kind'"v'Name' "'value'e"'nickname'      "kind": "F'kind'
- 'Field'"name": { 'name': "N'kind'"v'Name' "'value' }'avatar', ,{ "kind": "F'kind' "'Field'{ 'name': "N'kind'"v'Name' "'value' }'status'      "kind": "F'kind'
- 'Field'"name": { 'name': "N'kind'"v'Name' "'value'At'createdAt', ,{ "kind": "F'kind' "'Field'{ 'name': "N'kind'"v'Name' "'value'" 'isAdmin'}
-  },]
-} as, unkn,own as DocumentNode<ProfileQuery, ProfileQueryVariables>;
-export cnst UserListDocument = {
-  "kind": "D'kind't"'Document'io'definitions'kind": "O'kind'on'OperationDefinition'ration'operation'
- 'query'e": { 'name': "N'kind'"v'Name' "'value't"'userList'ariableD'variableDefinitions' "kind": "V'kind'eD'VariableDefinition'ariable"'variable': "V'kind'e"'Variable'{ 'name': "N'kind'"v'Name' "'value' }'offset'  "type": { 'type': "N'kind'Ty'NonNullType'{ 'type': "N'kind'pe'NamedType'{ 'name': "N'kind'"v'Name' "'value'} 'Int'    "defaultVa'defaultValue': "I'kind'e"'IntValue' "'value'  '0'{
-,      "kind": "V'kind'eD'VariableDefinition'ariable"'variable': "V'kind'e"'Variable'{ 'name': "N'kind'"v'Name' "'value'} 'limit'  "type": { 'type': "N'kind'Ty'NonNullType'{ 'type': "N'kind'pe'NamedType'{ 'name': "N'kind'"v'Name' "'value'} 'Int'    "defaultVa'defaultValue': "I'kind'e"'IntValue' "'value'  '10'{
-,      "kind": "V'kind'eD'VariableDefinition'ariable"'variable': "V'kind'e"'Variable'{ 'name': "N'kind'"v'Name' "'value'} 'where'  "type": { 'type': "N'kind'pe'NamedType'{ 'name': "N'kind'"v'Name' "'value're'UserWhereInput'],
- ,   "selection'selectionSet'"kind": "S'kind'on'SelectionSet'on'selections'   "kind": "F'kind'
- 'Field'"name": { 'name': "N'kind'"v'Name' "'value't"'userList'  "arguments'arguments'     "kind": "A'kind't"'Argument'  "name": { 'name': "N'kind'"v'Name' "'value' }'offset'    "value": {'value': "V'kind'e"'Variable'{ 'name': "N'kind'"v'Name' "'value' }'offset'   },, {
-          "kind": "A'kind't"'Argument'  "name": { 'name': "N'kind'"v'Name' "'value'},'limit'    "value": {'value': "V'kind'e"'Variable'{ 'name': "N'kind'"v'Name' "'value'} 'limit'   },, {
-          "kind": "A'kind't"'Argument'  "name": { 'name': "N'kind'"v'Name' "'value'},'where'    "value": {'value': "V'kind'e"'Variable'{ 'name': "N'kind'"v'Name' "'value'} 'where'   },],
-        "selection'selectionSet'    "kind": "S'kind'on'SelectionSet'  "selection'selections'       "kind": "F'kind'
- 'Field'    "name": { 'name': "N'kind'"v'Name' "'value'},'nodes'      "selection'selectionSet'        "kind": "S'kind'on'SelectionSet'      "selection'selections'": "F'kind' "'Field'{ 'name': "N'kind'"v'Name' "'value', 'id'              "kind": "F'kind'
- 'Field'        "name": { 'name': "N'kind'"v'Name' "'value'e"'nickname'  ,     }, { "kind": "F'kind' "'Field'{ 'name': "N'kind'"v'Name' "'value'} 'email'              "kind": "F'kind'
- 'Field'        "name": { 'name': "N'kind'"v'Name' "'value' }'avatar'  ,     }, { "kind": "F'kind' "'Field'{ 'name': "N'kind'"v'Name' "'value' }'status'              "kind": "F'kind'
- 'Field'        "name": { 'name': "N'kind'"v'Name' "'value'At'createdAt'  ,     }, { "kind": "F'kind' "'Field'{ 'name': "N'kind'"v'Name' "'value'" 'isAdmin'     ,   }
-         , }]
-        },
-      }]
-,    }
-  },]
-} as, unkn,own as DocumentNode<UserListQuery, UserListQueryVariables>;
-export cnst MessageSubDocument = {
-  "kind": "D'kind't"'Document'itio'definitions'kind": "O'kind'on'OperationDefinition'ration'operation'pt'subscription'e": { 'name': "N'kind'"v'Name' "'value'Su'MessageSub'election'selectionSet'"kind": "S'kind'on'SelectionSet'election'selections'   "kind": "F'kind'
- 'Field'"name": { 'name': "N'kind'"v'Name' "'value'Re'messageReceived'  "selection'selectionSet'    "kind": "S'kind'on'SelectionSet'  "selection'selections'": "F'kind' "'Field'{ 'name': "N'kind'"v'Name' "'value', 'id'          "kind": "F'kind'
- 'Field'    "name": { 'name': "N'kind'"v'Name' "'value' }'sender'  , }, { "kind": "F'kind' "'Field'{ 'name': "N'kind'"v'Name' "'value' }'type'          "kind": "F'kind'
- 'Field'    "name": { 'name': "N'kind'"v'Name' "'value'" 'content'  , }, { "kind": "F'kind' "'Field'{ 'name': "N'kind'"v'Name' "'value'Ty'contentType'          "kind": "F'kind'
- 'Field'    "name": { 'name': "N'kind'"v'Name' "'value'a"'metadata'  , }, { "kind": "F'kind' "'Field'{ 'name': "N'kind'"v'Name' "'value'At'createdAt'    },
-      }]
-,    }
-  },]
-} as, unkn,own as DocumentNode<MessageSubSubscription, MessageSubSubscriptionVariables>;
-export cnst OrderDirectionMap = {
-  ASC: "Specifies'Specifies an ascending order for a given `orderBy` argument.'"Specifies'Specifies a descending order for a given `orderBy` argument.'st;
 
-export onst PermissionTypeMap = {
+export type MessageSubSubscription = { __typename?: 'Subscription', messageReceived: { __typename?: 'Message', id: string, sender?: string | null, type: MessageType, content: string, contentType: MessageContentType, metadata?: any | null, createdAt: any } };
+
+export const UserInfoFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"UserInfo"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"User"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"nickname"}},{"kind":"Field","name":{"kind":"Name","value":"avatar"}},{"kind":"Field","name":{"kind":"Name","value":"status"}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}},{"kind":"Field","name":{"kind":"Name","value":"isAdmin"}}]}}]} as unknown as DocumentNode<UserInfoFragment, unknown>;
+export const LoginDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"login"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"email"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"password"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"login"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"email"},"value":{"kind":"Variable","name":{"kind":"Name","value":"email"}}},{"kind":"Argument","name":{"kind":"Name","value":"password"},"value":{"kind":"Variable","name":{"kind":"Name","value":"password"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"exp"}},{"kind":"Field","name":{"kind":"Name","value":"token"}},{"kind":"Field","name":{"kind":"Name","value":"user"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"UserInfo"}}]}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"UserInfo"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"User"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"nickname"}},{"kind":"Field","name":{"kind":"Name","value":"avatar"}},{"kind":"Field","name":{"kind":"Name","value":"status"}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}},{"kind":"Field","name":{"kind":"Name","value":"isAdmin"}}]}}]} as unknown as DocumentNode<LoginMutation, LoginMutationVariables>;
+export const ProfileDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"profile"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"profile"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"UserInfo"}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"UserInfo"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"User"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"nickname"}},{"kind":"Field","name":{"kind":"Name","value":"avatar"}},{"kind":"Field","name":{"kind":"Name","value":"status"}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}},{"kind":"Field","name":{"kind":"Name","value":"isAdmin"}}]}}]} as unknown as DocumentNode<ProfileQuery, ProfileQueryVariables>;
+export const UserListDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"userList"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"offset"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}},"defaultValue":{"kind":"IntValue","value":"0"}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"limit"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}},"defaultValue":{"kind":"IntValue","value":"10"}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"where"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"UserWhereInput"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"userList"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"offset"},"value":{"kind":"Variable","name":{"kind":"Name","value":"offset"}}},{"kind":"Argument","name":{"kind":"Name","value":"limit"},"value":{"kind":"Variable","name":{"kind":"Name","value":"limit"}}},{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"Variable","name":{"kind":"Name","value":"where"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"nodes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"nickname"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"avatar"}},{"kind":"Field","name":{"kind":"Name","value":"status"}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}},{"kind":"Field","name":{"kind":"Name","value":"isAdmin"}}]}}]}}]}}]} as unknown as DocumentNode<UserListQuery, UserListQueryVariables>;
+export const MessageSubDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"subscription","name":{"kind":"Name","value":"MessageSub"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"messageReceived"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"sender"}},{"kind":"Field","name":{"kind":"Name","value":"type"}},{"kind":"Field","name":{"kind":"Name","value":"content"}},{"kind":"Field","name":{"kind":"Name","value":"contentType"}},{"kind":"Field","name":{"kind":"Name","value":"metadata"}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}}]}}]}}]} as unknown as DocumentNode<MessageSubSubscription, MessageSubSubscriptionVariables>;
+export const OrderDirectionMap = {
+  ASC: "Specifies an ascending order for a given `orderBy` argument.",
+  DESC: "Specifies a descending order for a given `orderBy` argument.",
+} as const;
+
+export const PermissionTypeMap = {
   element: "元素",
   menu: "目录",
-  page: '页面',
+  page: "页面",
 } as const;
 
 export const UserRoleMap = {
   SystemAdmin: "系统后台管理员",
-  TenantOwner: '租户Owner',
-  TenantUser: '租户成员',
+  TenantOwner: "租户Owner",
+  TenantUser: "租户成员",
 } as const;
 
 export const UserStatusMap = {
@@ -1989,5 +1876,5 @@ export const UserStatusMap = {
 
 export const VerifyCodeTypeMap = {
   ForgetPassword: "忘记密码",
-  Register: '注册验证',
+  Register: "注册验证",
 } as const;

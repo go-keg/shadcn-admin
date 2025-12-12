@@ -33,8 +33,11 @@ export { DataTableBulkActions } from './bulk-actions'
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
   data: TData[]
+  table?: ReturnType<typeof useReactTable<TData>>
   loading?: boolean
-  toolbar?: {
+  toolbar?:
+  | React.ReactNode
+  | {
     searchPlaceholder?: string
     searchKey?: string
     filters?: {
@@ -46,8 +49,8 @@ interface DataTableProps<TData, TValue> {
         icon?: React.ComponentType<{ className?: string }>
       }[]
     }[]
-  } // 自定义工具栏区域
-  bulkActions?: React.ReactNode // 自定义工具栏区域
+  }
+  bulkActions?: React.ReactNode
   onChange?: (state: TableState) => void
   onRowSelectionChange?: (field: string, direction: OrderDirection) => void
 }
@@ -55,22 +58,20 @@ interface DataTableProps<TData, TValue> {
 export function DataTable<TData, TValue>({
   columns,
   data,
+  table: tableProp,
   loading,
   bulkActions,
   onChange,
   toolbar,
 }: DataTableProps<TData, TValue>) {
   const [rowSelection, setRowSelection] = useState({})
-  // const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({})
   const [sorting, setSorting] = useState<SortingState>([])
-  // const [columnFilters, onColumnFiltersChange] = useState<ColumnFiltersState>([])
   const [pagination, onPaginationChange] = useState<PaginationState>({
     pageIndex: 0,
     pageSize: 10,
   })
-  // Synced with URL states (updated to match route search schema defaults)
 
-  const table = useReactTable({
+  const internalTable = useReactTable({
     getCoreRowModel: getCoreRowModel(),
     renderFallbackValue: undefined,
     onPaginationChange: onPaginationChange,
@@ -81,9 +82,11 @@ export function DataTable<TData, TValue>({
     state: { sorting, pagination, rowSelection },
   })
 
+  const table = tableProp || internalTable
+
   useEffect(() => {
     onChange != undefined && onChange(table.getState())
-  }, [table])
+  }, [table.getState(), onChange])
 
   return (
     <div
@@ -92,12 +95,18 @@ export function DataTable<TData, TValue>({
         'flex flex-1 flex-col gap-4'
       )}
     >
-      <DataTableToolbar
-        table={table}
-        searchPlaceholder={toolbar?.searchPlaceholder}
-        searchKey={toolbar?.searchKey}
-        filters={toolbar?.filters}
-      />
+      {React.isValidElement(toolbar) ? (
+        toolbar
+      ) : (
+        <DataTableToolbar
+          table={table}
+          searchPlaceholder={
+            (toolbar as any)?.searchPlaceholder
+          }
+          searchKey={(toolbar as any)?.searchKey}
+          filters={(toolbar as any)?.filters}
+        />
+      )}
       <div className='overflow-hidden rounded-md border'>
         <Table>
           <TableHeader>
@@ -117,9 +126,9 @@ export function DataTable<TData, TValue>({
                       {header.isPlaceholder
                         ? null
                         : flexRender(
-                            header.column.columnDef.header,
-                            header.getContext()
-                          )}
+                          header.column.columnDef.header,
+                          header.getContext()
+                        )}
                     </TableHead>
                   )
                 })}

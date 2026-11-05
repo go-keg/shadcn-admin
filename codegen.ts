@@ -2,11 +2,11 @@ import type { CodegenConfig } from '@graphql-codegen/cli'
 
 const config: CodegenConfig = {
   schema: 'http://127.0.0.1:9001/query',
-  documents: ['src/**/*.tsx'],
+  documents: ['src/graphql/example/**/*.tsx'],
   ignoreNoDocuments: true,
   overwrite: true,
   generates: {
-    './src/gql/': {
+    './src/gql/example/': {
       preset: 'client',
       plugins: ['./codegen-enum-map-plugin.js'],
       config: {
@@ -17,7 +17,7 @@ const config: CodegenConfig = {
         persistedDocuments: false,
       },
     },
-    './schema.graphql': {
+    './src/graphql/example/schema.graphql': {
       plugins: ['schema-ast'],
       config: {
         includeDirectives: true,

@@ -1,5 +1,5 @@
 import { createFileRoute } from '@tanstack/react-router'
-import { ProfileQuery } from '@/graphql/queries/profile.tsx'
+import { ProfileQuery } from '@/graphql/example/queries/profile.tsx'
 import { useQuery } from 'urql'
 
 export const Route = createFileRoute('/_authenticated/examples/query')({
@@ -25,7 +25,7 @@ function RouteComponent() {
         width='400'
         height='250'
         alt='location-reference'
-        src={`${result.data?.profile?.avatar}`}
+        src={`${result.data?.profile ?}`}
       />
       <br />
       {result.data?.profile?.status}

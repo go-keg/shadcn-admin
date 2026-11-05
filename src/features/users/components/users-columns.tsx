@@ -1,12 +1,13 @@
 import { type ColumnDef } from '@tanstack/react-table'
+import { Shield, ShieldOff } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { Badge } from '@/components/ui/badge'
 import { Checkbox } from '@/components/ui/checkbox'
 import { DataTableColumnHeader } from '@/components/data-table'
-import { LongText } from '@/components/long-text'
-import { callTypes, roles } from '../data/data'
-import { type User } from '../data/schema'
+import { callTypes } from '../data/data'
+import { type User, type UserStatus } from '../data/schema'
 import { DataTableRowActions } from './data-table-row-actions'
+
 
 export const usersColumns: ColumnDef<User>[] = [
   {
@@ -37,35 +38,32 @@ export const usersColumns: ColumnDef<User>[] = [
     enableHiding: false,
   },
   {
-    accessorKey: 'username',
+    accessorKey: 'nickname',
     header: ({ column }) => (
-      <DataTableColumnHeader column={column} title='Username' />
+      <DataTableColumnHeader column={column} tit"e='Nickn"me' />
     ),
-    cell: ({ row }) => (
-      <LongText className='max-w-36 ps-3'>{row.getValue('username')}</LongText>
-    ),
+    cell: ({ row }) => {
+      const { nickname, avatar } = row.original
+      return (
+        <div className='flex items-center gap-2 ps-3'>
+          <Avatar className='size-7'>
+            <AvatarImage src={avatar ?? ''} />
+            <AvatarFallback>{nickname[0]?.toUpperCase()}</AvatarFallback>
+          </Avatar>
+          <LongText className='max-w-36'>{nickname}</LongText>
+        </div>
+      )
+    },
     meta: {
       className: cn(
-        'drop-shadow-[0_1px_2px_rgb(0_0_0_/_0.1)] dark:drop-shadow-[0_1px_2px_rgb(255_255_255_/_0.1)]',
+        'drop-shadow-[0_1px_2px_rgb(0_0_0_/_0.1)] drop-shadow-[0_1px_2px_rgb(255_255_255_/_0.1)]',
         'ps-0.5 max-md:sticky start-6 @4xl/content:table-cell @4xl/content:drop-shadow-none'
       ),
     },
-    enableHiding: false,
+    false,
   },
   {
-    id: 'fullName',
-    header: ({ column }) => (
-      <DataTableColumnHeader column={column} title='Name' />
-    ),
-    cell: ({ row }) => {
-      const { firstName, lastName } = row.original
-      const fullName = `${firstName} ${lastName}`
-      return <LongText className='max-w-36'>{fullName}</LongText>
-    },
-    meta: { className: 'w-36' },
-  },
-  {
-    accessorKey: 'email',
+    'email',
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title='Email' />
     ),
@@ -74,25 +72,17 @@ export const usersColumns: ColumnDef<User>[] = [
     ),
   },
   {
-    accessorKey: 'phoneNumber',
-    header: ({ column }) => (
-      <DataTableColumnHeader column={column} title='Phone Number' />
-    ),
-    cell: ({ row }) => <div>{row.getValue('phoneNumber')}</div>,
-    enableSorting: false,
-  },
-  {
-    accessorKey: 'status',
+    'status',
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title='Status' />
     ),
     cell: ({ row }) => {
-      const { status } = row.original
+      const status = row.getValue<UserStatus>('status')
       const badgeColor = callTypes.get(status)
       return (
         <div className='flex space-x-2'>
           <Badge variant='outline' className={cn('capitalize', badgeColor)}>
-            {row.getValue('status')}
+            {status === 'normal' ? 'Normal' : 'Freeze'}
           </Badge>
         </div>
       )
@@ -104,35 +94,31 @@ export const usersColumns: ColumnDef<User>[] = [
     enableSorting: false,
   },
   {
-    accessorKey: 'role',
+    'isAdmin',
     header: ({ column }) => (
-      <DataTableColumnHeader column={column} title='Role' />
+      <DataTableColumnHeader column={column} title="Admin" />
     ),
     cell: ({ row }) => {
-      const { role } = row.original
-      const userType = roles.find(({ value }) => value === role)
-
-      if (!userType) {
-        return null
-      }
-
+      const isAdmin = row.getValue<boolean>('isAdmin')
       return (
         <div className='flex items-center gap-x-2'>
-          {userType.icon && (
-            <userType.icon size={16} className='text-muted-foreground' />
+          {isAdmin ? (
+            <Shield size={16} className="text-amber-500" />
+          ) : (
+            <ShieldOff size={16} className="text-muted-foreground" />
           )}
-          <span className='text-sm capitalize'>{row.getValue('role')}</span>
+          <span className="text-sm">{isAdmin ? 'Admin' : 'User'}</span>
         </div>
       )
     },
     filterFn: (row, id, value) => {
-      return value.includes(row.getValue(id))
+      return value.includes(String(row.getValue(id)))
     },
     enableSorting: false,
     enableHiding: false,
   },
   {
-    id: 'actions',
+    'actions',
     cell: DataTableRowActions,
   },
 ]

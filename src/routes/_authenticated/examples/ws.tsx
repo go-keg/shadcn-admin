@@ -1,5 +1,5 @@
 import { createFileRoute } from '@tanstack/react-router'
-import { type MessageSubSubscription } from '@/gql/graphql.ts'
+import { type MessageSubSubscription } from '@/gql/example/graphql.ts'
 import { gql, useSubscription } from 'urql'
 
 export const Route = createFileRoute('/_authenticated/examples/ws')({

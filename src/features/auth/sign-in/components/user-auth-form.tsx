@@ -1,10 +1,10 @@
-import { useState } from 'react'
 import { z } from 'zod'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Link, useNavigate } from '@tanstack/react-router'
-import { LoginMutation } from '@/graphql/mutations/login.tsx'
+import { LoginMutation } from '@/graphql/example/mutations/login.tsx'
 import { Loader2, LogIn } from 'lucide-react'
+import { toast } from 'sonner'
 import { useMutation } from 'urql'
 import { IconFacebook, IconGithub } from '@/assets/brand-icons'
 import { cn } from '@/lib/utils'
@@ -40,9 +40,9 @@ export function UserAuthForm({
   redirectTo,
   ...props
 }: UserAuthFormProps) {
-  const [isLoading, setIsLoading] = useState(false)
   const navigate = useNavigate()
   const { login } = useAuth()
+  const [{ fetching, error }, executeMutation] = useMutation(LoginMutation)
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -52,24 +52,28 @@ export function UserAuthForm({
     },
   })
 
-  const [_, executeMutation] = useMutation(LoginMutation)
-
   function onSubmit(data: z.infer<typeof formSchema>) {
-    setIsLoading(true)
     executeMutation({
       email: data.email,
       password: data.password,
     }).then((result) => {
-      setIsLoading(false)
-      const user = result.data?.login.user
-      login(result.data?.login.token ?? '', {
-        id: user?.id ?? '',
-        nickname: user?.nickname ?? '',
-        email: user?.email ?? '',
-        avatar: user?.avatar ?? '',
+      if (result.error) {
+        toast.error(result.error.message)
+        return
+      }
+      if (!result.data?.login) {
+        toast.error('Invalid credentials')
+        return
+      }
+
+      const { token, user } = result.data.login
+      login(token, {
+        id: user.id,
+        nickname: user.nickname,
+        email: user.email,
+        avatar: user.avatar ?? '',
       })
 
-      // Redirect to the stored location or default to dashboard
       const targetPath = redirectTo || '/'
       navigate({ to: targetPath, replace: true })
     })
@@ -114,8 +118,9 @@ export function UserAuthForm({
             </FormItem>
           )}
         />
-        <Button className='mt-2' disabled={isLoading}>
-          {isLoading ? <Loader2 className='animate-spin' /> : <LogIn />}
+        {error && <p className='text-destructive text-sm'>{error.message}</p>}
+        <Button className='mt-2' disabled={fetching}>
+          {fetching ? <Loader2 className='animate-spin' /> : <LogIn />}
           Sign in
         </Button>
 
@@ -131,10 +136,10 @@ export function UserAuthForm({
         </div>
 
         <div className='grid grid-cols-2 gap-2'>
-          <Button variant='outline' type='button' disabled={isLoading}>
+          <Button variant='outline' type='button' disabled={fetching}>
             <IconGithub className='h-4 w-4' /> GitHub
           </Button>
-          <Button variant='outline' type='button' disabled={isLoading}>
+          <Button variant='outline' type='button' disabled={fetching}>
             <IconFacebook className='h-4 w-4' /> Facebook
           </Button>
         </div>

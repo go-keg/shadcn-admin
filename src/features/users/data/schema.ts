@@ -1,32 +1,29 @@
 import { z } from 'zod'
 
-const userStatusSchema = z.union([
-  z.literal('active'),
-  z.literal('inactive'),
-  z.literal('invited'),
-  z.literal('suspended'),
-])
-export type UserStatus = z.infer<typeof userStatusSchema>
+export const userStatusSchema = z.enum(['freeze', 'normal'])
 
-const userRoleSchema = z.union([
-  z.literal('superadmin'),
-  z.literal('admin'),
-  z.literal('cashier'),
-  z.literal('manager'),
-])
+export type UserStatus = 'freeze' | 'normal'
 
-const userSchema = z.object({
+export const userSchema = z.object({
+  __typename: z.literal('User').optional(),
   id: z.string(),
-  firstName: z.string(),
-  lastName: z.string(),
-  username: z.string(),
   email: z.string(),
-  phoneNumber: z.string(),
-  status: userStatusSchema,
-  role: userRoleSchema,
-  createdAt: z.coerce.date(),
-  updatedAt: z.coerce.date(),
+  nickname: z.string(),
+  avatar: z.string().nullable().optional(),
+  status: z.string(),
+  isAdmin: z.boolean(),
+  createdAt: z.any().optional(),
+  updatedAt: z.any().optional(),
+  oauthAccounts: z
+    .array(
+      z.object({
+        __typename: z.literal('OAuthAccount').optional(),
+        profile: z.any().optional(),
+        provider: z.string(),
+      })
+    )
+    .nullable()
+    .optional(),
 })
-export type User = z.infer<typeof userSchema>
 
-export const userListSchema = z.array(userSchema)
+export type User = z.infer<typeof userSchema>

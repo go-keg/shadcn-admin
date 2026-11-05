@@ -1,6 +1,6 @@
 'use client'
 
-import { createContext, useContext, useEffect, useState } from 'react'
+import { createContext, useContext, useEffect } from 'react'
 import { useAuthStore } from '@/stores/auth-store'
 
 interface User {
@@ -13,6 +13,7 @@ interface User {
 interface AuthContextType {
   user: User | null
   token: string | null
+  isAuthenticated: boolean
   login: (token: string, user: User) => void
   logout: () => void
 }
@@ -20,42 +21,42 @@ interface AuthContextType {
 const AuthContext = createContext<AuthContextType | null>(null)
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
-  const [user, setUser] = useState<User | null>(null)
-  const [token, setToken] = useState<string | null>(null)
-  const { auth } = useAuthStore()
+  const { accessToken, user, setAccessToken, setUser, reset } = useAuthStore()
+
+  // On mount, load user from cookie if token exists (no user stored, just token)
+  // User info will be fetched on demand by the app
   useEffect(() => {
-    const savedToken = localStorage.getItem('token')
-    const savedUser = localStorage.getItem('user')
-    if (savedToken && savedUser) {
-      setToken(savedToken)
-      setUser(JSON.parse(savedUser))
-      auth.setAccessToken(savedToken)
+    if (accessToken && !user) {
+      // Could trigger a profile fetch here if needed
     }
-  }, [])
+  }, [accessToken, user])
 
   const login = (newToken: string, newUser: User) => {
-    setToken(newToken)
+    setAccessToken(newToken)
     setUser(newUser)
-    localStorage.setItem('token', newToken)
-    localStorage.setItem('user', JSON.stringify(newUser))
-    auth.setAccessToken(newToken)
   }
 
   const logout = () => {
-    setToken(null)
-    setUser(null)
-    localStorage.removeItem('token')
-    localStorage.removeItem('user')
-    auth.resetAccessToken()
+    reset()
   }
 
   return (
-    <AuthContext value={{ user, token, login, logout }}>{children}</AuthContext>
+    <AuthContext
+      value={{
+        user,
+        token: accessToken,
+        isAuthenticated: !!accessToken,
+        login,
+        logout,
+      }}
+    >
+      {children}
+    </AuthContext>
   )
 }
 
 export const useAuth = () => {
   const ctx = useContext(AuthContext)
-  if (!ctx) throw new Error('useAuth 必须在 AuthProvider 中使用')
+  if (!ctx) throw new Error('useAuth must be used within AuthProvider')
   return ctx
 }

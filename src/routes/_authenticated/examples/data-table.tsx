@@ -7,8 +7,8 @@ import {
   type UserListQuery,
   UserStatusMap,
   type UserWhereInput,
-} from '@/gql/graphql.ts'
-import { UserList } from '@/graphql/queries/users.tsx'
+} from '@/gql/example/graphql.ts'
+import { UserList } from '@/graphql/example/queries/users.tsx'
 import { MoreHorizontal } from 'lucide-react'
 import { useQuery } from 'urql'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar.tsx'
@@ -96,6 +96,7 @@ const columns: ColumnDef<User>[] = [
     enableHiding: false,
     cell: ({ row }) => {
       const user = row.original
+      const vv = projectProfitMargin(user)
       return (
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
@@ -108,7 +109,7 @@ const columns: ColumnDef<User>[] = [
             <DropdownMenuItem
               onClick={() => navigator.clipboard.writeText(user.id)}
             >
-              Copy User ID
+              Copy User ID {vv}
             </DropdownMenuItem>
             <DropdownMenuSeparator />
             <DropdownMenuItem>View customer</DropdownMenuItem>
@@ -121,7 +122,7 @@ const columns: ColumnDef<User>[] = [
 ]
 
 export function DataTableDemo() {
-  const [where, _] = useState<UserWhereInput | null>({})
+  const [where, _] = useState<UserWhereInput | null>(null)
   const [limit, setLimit] = useState<number>(10)
   const [offset, setOffset] = useState<number>(0)
   const [result] = useQuery({
@@ -141,7 +142,6 @@ export function DataTableDemo() {
           columns={columns}
           loading={result.fetching}
           onChange={(v) => {
-            console.log(v)
             setLimit(v.pagination.pageSize)
             setOffset(v.pagination.pageIndex * v.pagination.pageSize)
           }}

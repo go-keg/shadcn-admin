@@ -1,4 +1,6 @@
 import { getRouteApi } from '@tanstack/react-router'
+import { UserList } from '@/graphql/example/queries/users.tsx'
+import { useQuery } from 'urql'
 import { ConfigDrawer } from '@/components/config-drawer'
 import { Header } from '@/components/layout/header'
 import { Main } from '@/components/layout/main'
@@ -9,13 +11,17 @@ import { UsersDialogs } from './components/users-dialogs'
 import { UsersPrimaryButtons } from './components/users-primary-buttons'
 import { UsersProvider } from './components/users-provider'
 import { UsersTable } from './components/users-table'
-import { users } from './data/users'
 
 const route = getRouteApi('/_authenticated/users/')
 
 export function Users() {
   const search = route.useSearch()
   const navigate = route.useNavigate()
+
+  const [result] = useQuery({
+    query: UserList,
+    variables: { limit: 100, offset: 0 },
+  })
 
   return (
     <UsersProvider>
@@ -38,7 +44,11 @@ export function Users() {
           </div>
           <UsersPrimaryButtons />
         </div>
-        <UsersTable data={users} search={search} navigate={navigate} />
+        <UsersTable
+          data={result.data?.userList.nodes ?? []}
+          search={search}
+          navigate={navigate}
+        />
       </Main>
 
       <UsersDialogs />

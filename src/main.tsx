@@ -63,7 +63,7 @@ const queryClient = new QueryClient({
       if (error instanceof AxiosError) {
         if (error.response?.status === 401) {
           toast.error('Session expired!')
-          useAuthStore.getState().auth.reset()
+          useAuthStore.getState().reset()
           const redirect = `${router.history.location.href}`
           router.navigate({ to: '/sign-in', search: { redirect } })
         }
@@ -83,7 +83,7 @@ const wsClient = createWSClient({
   url: 'ws://127.0.0.1:9001/query',
   connectionParams: async () => {
     // 可以是异步函数
-    const token = useAuthStore.getState().auth.accessToken
+    const token = useAuthStore.getState().accessToken
     return {
       Authorization: token ? `Bearer ${token}` : '',
       'X-ACCOUNT-ID': 1,
@@ -110,7 +110,7 @@ const gqlClient = new Client({
     }),
   ],
   fetchOptions: () => {
-    const token = useAuthStore.getState().auth.accessToken
+    const token = useAuthStore.getState().accessToken
     return {
       headers: { authorization: token ? `Bearer ${token}` : '' },
     }

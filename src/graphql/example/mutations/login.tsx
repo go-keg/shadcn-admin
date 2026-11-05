@@ -1,4 +1,4 @@
-import { graphql } from '@/gql'
+import { graphql } from '@/gql/example'
 
 export const LoginMutation = graphql(/* GraphQL */ `
   mutation login($email: String!, $password: String!) {
@@ -6,20 +6,9 @@ export const LoginMutation = graphql(/* GraphQL */ `
       exp
       token
       user {
+        createdAt
         ...UserInfo
       }
     }
-  }
-`)
-
-export const UserInfo = graphql(/* GraphQL */ `
-  fragment UserInfo on User {
-    id
-    email
-    nickname
-    avatar
-    status
-    createdAt
-    isAdmin
   }
 `)

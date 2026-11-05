@@ -1,4 +1,4 @@
-import { graphql } from '@/gql'
+import { graphql } from '@/gql/example'
 
 export const ProfileQuery = graphql(/* GraphQL */ `
   query profile {

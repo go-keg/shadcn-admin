@@ -1,20 +1,18 @@
 import { useState } from 'react'
 import { createFileRoute } from '@tanstack/react-router'
-import {
-  type UserListQuery,
-  UserStatusMap,
-  type UserWhereInput,
-} from '@/gql/graphql.ts'
-import { UserList } from '@/graphql/queries/users.tsx'
+import { UserStatusMap, type UserWhereInput } from '@/gql/example/graphql.ts'
+import { type ProjectListQuery } from '@/gql/pm/graphql.ts'
+import { UserList } from '@/graphql/example/queries/users.tsx'
 import { Avatar, Input, message, Select, Space, Table } from 'antd'
 import type { ColumnsType } from 'antd/es/table'
 import { useQuery } from 'urql'
+
 
 export const Route = createFileRoute('/_authenticated/examples/table')({
   component: RouteComponent,
 })
 
-type User = NonNullable<UserListQuery['userList']['nodes']>[number]
+type User = NonNullable<ProjectListQuery['projectList']['nodes']>[number]
 
 function RouteComponent() {
   const [where, setWhere] = useState<UserWhereInput | null>(null)
@@ -54,7 +52,11 @@ function RouteComponent() {
         <Space size='middle'>
           <a
             onClick={() => {
-              message.info(`Invite User ID: ${record.id}`)
+              message.info(
+                `Invite User ID: ${record.oauthAccounts?.map((v) => {
+                  return v.profile + v.provider
+                }),}`
+              )
             }}
           >
             Invite
@@ -75,6 +77,7 @@ function RouteComponent() {
     query: UserList,
     variables: {
       limit: 20,
+      offset: 10,
       where: where,
     },
   })
@@ -83,11 +86,11 @@ function RouteComponent() {
     if (value === '') {
       setWhere((prevState) => ({
         ...prevState,
-        or: [],
       }))
     } else {
       setWhere((prevState) => ({
         ...prevState,
+        avatarContains: 'a',
         or: [{ nicknameContains: value }, { emailContains: value }],
       }))
     }

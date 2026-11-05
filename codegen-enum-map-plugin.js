@@ -10,6 +10,14 @@ export const plugin = (schema) => {
       if (items.length > 0) {
         enums.push(`export const ${name}Map = {\n${items.join('\n')}\n} as const;`)
       }
+
+      const options = type.getValues().filter(v => !!v.description).map(v => {
+        const desc = v.astNode?.description?.value ?? ''
+        return `  {value: "${v.name}", label: ${JSON.stringify(desc)}},`
+      })
+      if (options.length > 0) {
+        enums.push(`export const ${name}Options = [\n${options.join('\n')}\n] as const;`)
+      }
     }
   }
   return enums.join('\n\n')
